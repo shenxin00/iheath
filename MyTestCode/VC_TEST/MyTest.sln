@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DLG_Test", "DLG_Test\DLG_Test.vcproj", "{3F0E6B7D-7E73-457F-8DF5-DD655BBC7F46}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SIGWnd_Test", "SIGWnd_Test\SIGWnd_Test.vcproj", "{69EC798B-C471-46E4-AD17-C58E56E10CED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F0E6B7D-7E73-457F-8DF5-DD655BBC7F46}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3F0E6B7D-7E73-457F-8DF5-DD655BBC7F46}.Debug|Win32.Build.0 = Debug|Win32
+		{3F0E6B7D-7E73-457F-8DF5-DD655BBC7F46}.Release|Win32.ActiveCfg = Release|Win32
+		{3F0E6B7D-7E73-457F-8DF5-DD655BBC7F46}.Release|Win32.Build.0 = Release|Win32
+		{69EC798B-C471-46E4-AD17-C58E56E10CED}.Debug|Win32.ActiveCfg = Debug|Win32
+		{69EC798B-C471-46E4-AD17-C58E56E10CED}.Debug|Win32.Build.0 = Debug|Win32
+		{69EC798B-C471-46E4-AD17-C58E56E10CED}.Release|Win32.ActiveCfg = Release|Win32
+		{69EC798B-C471-46E4-AD17-C58E56E10CED}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
