@@ -5,6 +5,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Win32Demo", "Win32Demo\Win3
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mfcDemo", "mfcDemo\mfcDemo.vcproj", "{4C635158-FDE5-4EE4-B51D-4F32E07DDC23}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vlcDemo", "vlcDemo\vlcDemo.vcproj", "{1B29A4B6-CFBD-46AC-AE55-9882C972F2CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -19,6 +21,10 @@ Global
 		{4C635158-FDE5-4EE4-B51D-4F32E07DDC23}.Debug|Win32.Build.0 = Debug|Win32
 		{4C635158-FDE5-4EE4-B51D-4F32E07DDC23}.Release|Win32.ActiveCfg = Release|Win32
 		{4C635158-FDE5-4EE4-B51D-4F32E07DDC23}.Release|Win32.Build.0 = Release|Win32
+		{1B29A4B6-CFBD-46AC-AE55-9882C972F2CB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1B29A4B6-CFBD-46AC-AE55-9882C972F2CB}.Debug|Win32.Build.0 = Debug|Win32
+		{1B29A4B6-CFBD-46AC-AE55-9882C972F2CB}.Release|Win32.ActiveCfg = Release|Win32
+		{1B29A4B6-CFBD-46AC-AE55-9882C972F2CB}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
