@@ -1,0 +1,220 @@
+//ctagsを使うプラグインもどき
+	if (!existfile(currentmacrodirectory + "\\plugin.ini")) goto _error_no_ini;
+	#ItemTextLen = getininum(currentmacrodirectory + "\\..\\config.ini", "config", "ItemLengthLimit");
+	$DlgSort = getinistr(currentmacrodirectory + "\\plugin.ini", "C", "DlgSort");if ($DlgSort != "yes") $DlgSort = "no";
+	$DlgHead = getinistr(currentmacrodirectory + "\\plugin.ini", "C", "DlgHead");if ($DlgHead != "yes") $DlgHead = "no";
+	$ctags = getinistr(currentmacrodirectory + "\\plugin.ini", "C", "ctags");if ($ctags == "") $ctags = "ctags";
+	#iln = lineno;
+init:
+	if ((!readonly) && (updated)) save;
+	$$tags = currentmacrodirectory + "\\tags.tag";
+	##n = dllfunc("REMOVE", "\"" + $$tags + "\"");
+	$ctags = $ctags + " -n --c-types=f --fields=-k";
+	if($DlgSort == "yes")$ctags = $ctags + " --sort=foldcase";
+	else $ctags = $ctags + " -u";
+	##charset=charset&63;
+	if(##charset <= 1){;}
+	else if(##charset == 3)$ctags = $ctags + " --jcode=euc";
+	else if(##charset == 6)$ctags = $ctags + " --jcode=utf8";
+	else $ctags = $ctags + " --jcode=ascii";//苦し紛れ……
+	runsync2 $ctags + " -f\"" + $$tags + "\" \"" + filename + "\"";
+	if (!existfile($$tags)) {
+		message "タグファイルが作れませんでした。\n対応していないエンコードのファイルの可能性があります。";
+		if (!dllfunc("SETVAR","tags", $$tags)) goto _error_x;
+		call ERROR 50;
+	}
+	
+	//データを取得
+	if (dllfuncstr("SIZEOF", "\"" + $$tags + "\"") == "0" ) { ##n = dllfunc("REMOVE", "\"" + $$tags + "\""); call ERROR 4; }; // ierr=4
+	##hWnd0 = hidemaruhandle(0);openfile "/h \"" + $$tags + "\"";##hWnd1 = hidemaruhandle(0);
+	disabledraw;
+	$searchbuffer = searchbuffer;#searchoption = searchoption;
+	searchdown "^[^!][^_]", regular;//EOFが……そのせい↓
+	##ctaghead = lineno;if(##ctaghead==1)##ctaghead=linecount2;
+	#coltotal = linecount2 - ##ctaghead;//項目数
+	if(#coltotal <= 0){
+		setactivehidemaru(##hWnd0); closehidemaruforced(##hWnd1);
+		##n = dllfunc("REMOVE", "\"" + $$tags + "\"");
+		setsearch $searchbuffer, #searchoption;
+		call ERROR 4;
+	}
+	##n = 0;
+	while (##n <= #coltotal) {
+		movetolineno 1 , ##n + ##ctaghead;
+		##x=x;##y=y;
+		searchdown "\\t", regular;delete;
+		$funcname[##n] = gettext(##x , ##y , x , y);//関数名
+		finddown;delete;//ファイル名は不要
+		##x=x;##y=y;
+		searchdown "\\t|$", regular;
+		$funclinen[##n] = gettext(##x , ##y , x , y);//行数
+		$funcpar[##n] = "";
+		if(code!=13){//クラスの内部関数
+			$funclinen[##n] = leftstr($funclinen[##n] , strlen($funclinen[##n]) - 2);
+			searchdown "class:";
+			if(result && (lineno==##n+##ctaghead)){
+				delete;
+				##x=x;##y=y;
+				golineend2;
+				$funcpar[##n] = gettext(##x , ##y , x , y);//行数
+			}
+		}
+		##n=##n+1;
+	}
+	setsearch $searchbuffer, #searchoption;
+	setactivehidemaru(##hWnd0); closehidemaruforced(##hWnd1);//tag用済み
+	disabledraw;
+	call MakeDialog;
+
+main:
+	$SelectID = "1";##SelectLine = 0;
+	if($DlgHead == "yes"){
+		if (!dllfunc("SETCTRLITEM", "tree1", "\"H.\",\"[Head]/[BOF]\"", "root") ) call ERROR 8;
+		$SelectID ="H.";
+	}
+	##count = 1;
+	##nclass = 0;
+	while(##count <= #coltotal) {
+		if( !(##count % 32) ) title "解析中・・・ (" + str(##count) + "/" + str(#coltotal) + ")";
+		$ItemID = hex(##count);
+		##line = val($funclinen[##count - 1]);
+		$ItemText = $funcname[##count - 1];
+		if((#iln >= ##line) && (##line >= ##SelectLine)){$SelectID = $ItemID;##SelectLine = ##line;}
+		// 表示用のテキストを作成 - 文字数制限+行番号付加
+		$ItemText = leftstr($ItemText, #ItemTextLen) + " - (" + $funclinen[##count - 1] +")";
+		if($funcpar[##count - 1] == ""){
+			$$par = "root";
+		}else{//クラス
+			##fnewclass = true;
+			##loopcounter = 0;
+ 			while(##loopcounter <= ##nclass){
+				if($funcpar[##count - 1] == $$classnames[##loopcounter]){
+					##fnewclass = false;
+					break;
+				}
+				##loopcounter = ##loopcounter + 1;
+			}
+			if(##fnewclass){//新しいの
+				##nclass = ##nclass + 1;
+		  		if (!dllfunc("SETCTRLITEM", "tree1", "\"C." + hex(##nclass) + "\",\"" + $funcpar[##count - 1] + " - CLASS - (" + $funclinen[##count - 1] +")\"", "root")) call ERROR 8;
+		  		$$classnames[##nclass] = $funcpar[##count - 1];
+		  		$$par = "C." + hex(##nclass);
+		  	}else{
+				$$par = "C." + hex(##loopcounter);
+			}
+		}
+		// アイテムを追加
+		if (!dllfunc("SETCTRLITEM", "tree1", "\"" + $ItemID + "\",\"" + $ItemText + "\"", $$par) ) call ERROR 8;
+		##count = ##count + 1;
+	}
+	if (!dllfunc("REMOVE", "\"" + $$tags + "\"")) { if (!dllfunc("SETVAR","tags", $$tags)) goto _error_x; call ERROR 51; };
+	goto ShowTree;
+
+MakeDialog:
+	$$DlgOpt   = getinistr(currentmacrodirectory + "\\..\\config.ini", "config", "DlgOpt");
+	$$DlgOpt = dllfuncstr("GSUB", $$DlgOpt, "%fn", fontname, 1);
+	if (fontname == "Terminal") $$DlgOpt = $$DlgOpt + " 11"; else $$DlgOpt = $$DlgOpt + " " + getconfig("FontPoint"); //フォントサイズを秀丸にあわせる．
+
+	##DlgWidth = getininum(currentmacrodirectory + "\\..\\tribute.ini", "DialogWidth", filetype);
+	if (##DlgWidth < 1) ##DlgWidth = getininum(currentmacrodirectory + "\\..\\config.ini", "config", "DlgWidth");
+
+	// ダイアログ高さの指定をチェック
+	##TY = getininum(currentmacrodirectory + "\\..\\tribute.ini", "DialogHeight", filetype);
+	if (##TY > getininum(currentmacrodirectory + "\\..\\config.ini", "config", "DlgHeightLimit")) {
+		##TY = getininum(currentmacrodirectory + "\\..\\config.ini", "config", "DlgHeightLimit");
+	} else if (##TY < 1) { ##TY = getininum(currentmacrodirectory + "\\..\\config.ini", "config", "DlgHeightDefault"); };
+
+
+	// ツリービューを作成(識別名 Tree1)
+	if (dllfunc("NEWDIALOG", basename2 + " - Tribute " + getinistr(currentmacrodirectory + "\\..\\config.ini", "config", "Ver") + " - C/C++ MODE TEST", ##DlgWidth, $$DlgOpt) == 0 ||
+		dllfunc("NEWCONTROL","tree","tree1",$$DlgOpt) == 0 ||
+		dllfunc("SETCTRLSORT", "tree1", "no") == 0 ||
+		dllfunc("SETCTRLFONT","tree1", "'' '' ''") == 0 ||
+		dllfunc("SETCTRLHEIGHT","",##TY) == 0 ||
+		dllfunc("NEWCONTROL","defbutton","","OK") == 0 ||
+		dllfunc("SETCTRLNOTIFY","","1") == 0 ||
+		dllfunc("SETCTRLWIDTH","",##DlgWidth/4) == 0 ||
+		dllfunc("NEWCONTROL","button","","Cancel") == 0 ||
+		dllfunc("SETCTRLNOTIFY","","0") == 0 ||
+		dllfunc("SETCTRLWIDTH","",##DlgWidth / 4) == 0 ||
+		dllfunc("NEWCONTROL","button","config","&config") == 0 ||
+		dllfunc("SETCTRLNOTIFY","","12") == 0 ||
+		dllfunc("SETCTRLWIDTH","",##DlgWidth / 4) == 0 ||
+		dllfunc("NEWCONTROL","button","help","&help") == 0 ||
+		dllfunc("SETCTRLWIDTH","",0) == 0 ||
+		dllfunc("SETCTRLNOTIFY","","14") == 0) call ERROR 7;
+	return;
+
+ShowTree:
+	moveto val(dllfuncstr("GETVAR","ix")), val(dllfuncstr("GETVAR","iy"));
+	// 描画を許可
+	enabledraw y - val( dllfuncstr("GETVAR","cpos") );
+	title 0;
+	// Show Dialog!
+	if( !dllfunc("SETCTRLSTATE", "tree1", $SelectID) ) goto _error_x;
+	if( !dllfunc("SHOWDIALOG", hidemaruhandle(0), 0)  ) goto _error_x;
+	$name = "";
+	$$olditem = dllfuncstr("GETCTRLITEM", "tree1");
+	while (!strlen($name)) {
+		$name  = dllfuncstr("WAITCTRLNOTIFY", 64);
+		$$item = dllfuncstr("GETCTRLITEM", "tree1");
+		// Dynamic Jamp!
+		if(($$item != $$olditem) && (!iskeydown(0x10)) ){
+			escape;
+			call _to_lineno $$item;
+			selectline;
+			$$olditem = $$item;
+		};
+	};
+	// ダイアログの位置を保存
+	execmacro currentmacrodirectory + "\\..\\lib\\save-dialog.mac";
+	if (!dllfunc("ENDDIALOG")) goto _error_x;
+	escape;
+	if ($name == "12") call edit_config;
+	if ($name == "14") call view_help;
+	if ($name == "1") {
+		if (!dllfunc("SETVAR","endcode", "1")) goto _error_x;
+		call _to_lineno $$item;
+	};
+	goto end;
+
+_to_lineno:
+	// 引数の文字列から行番号を取得
+	##l = dllfunc("STRRSTR", $$1, "(");
+	##r = dllfunc("STRRSTR", $$1, ")");
+	$$line = dllfuncstr("MIDSTR", $$1, ##l + 1, ##r);
+	disabledraw;
+	movetolineno 1, val($$line);
+	enabledraw y - val( dllfuncstr("GETVAR","cpos") );
+	return;
+
+end:
+	endmacro;
+
+edit_config:
+	// 設定ファイルを開く
+	if( !dllfunc("SETVAR","filetype", filetype ) ) goto _error_x;
+	execmacro currentmacrodirectory + "\\..\\lib\\tribute-config.mac";
+	goto end;
+
+view_help:
+	// ヘルプを開いて終了
+	if (!dllfunc("SETVAR","HelpFile", currentmacrodirectory + "\\..\\tribute.txt")) goto _error_x;
+	execmacro currentmacrodirectory + "\\..\\lib\\tribute-help.mac";
+	goto end;
+
+ERROR:
+	// エラー番号を ini に退避してメッセージ表示
+	if (!dllfunc("SETVAR","ierr", str(##1))) goto _error_x;
+	if (!dllfunc("SETVAR","filetype", filetype)) goto _error_x;
+	execmacro currentmacrodirectory + "\\..\\lib\\tribute-error.mac";
+	goto end;
+
+_error_no_ini:
+	message "設定ファイル\n" + currentmacrodirectory + "\\plugin.ini" + "が見つかりませんでした．たぶんインストールミスです．";
+	endmacro;
+
+_error_x:
+	message "何かのエラーによりマクロを中断します．\n" + "このエラーが毎回出るときはカモノハシに報告して下さい．";
+	goto end;
+
