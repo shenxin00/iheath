@@ -1,7 +1,7 @@
 #ifndef Vxml_VxmlCOMPONTE_H
 #define Vxml_VxmlCOMPONTE_H
 #include "CBaseModule.h"
-#include "comm.h"
+#include "VbCommon.h"
 
 
 

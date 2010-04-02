@@ -1,5 +1,5 @@
 
-#include "comm.h"
+#include "VbCommon.h"
 #include "VxmlSAXHandler.h"
 #include <xercesc/sax2/Attributes.hpp>
 

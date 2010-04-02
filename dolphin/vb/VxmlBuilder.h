@@ -1,7 +1,7 @@
 #ifndef VxmlVxmlBUILDER_H
 #define VxmlVxmlBUILDER_H
 
-#include "comm.h"
+#include "VbCommon.h"
 #include "CVxmlModules.h"
 
 using namespace std;
