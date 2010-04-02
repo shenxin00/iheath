@@ -7,28 +7,28 @@
 
 
 
-struct VxmlEvent
+struct CEvent
 {
 	int Type;
 	CBaseModule *Scope;
 	CBaseModule *context;
 };
 
-#define VxmlEventList list<struct VxmlEvent*>
+#define CEventList list<struct CEvent*>
 
 
 
 /**
 	@author Y.Sun <sunyan@hit.edu.cn>
 */
-class VxmlDocument: public CBaseModule{
+class CDocumentModule: public CBaseModule{
 	public:
-		VxmlDocument();
-		virtual ~VxmlDocument();
+		CDocumentModule();
+		virtual ~CDocumentModule();
 		virtual void Accept(VxmlAbsInterpreter *interpreter);
 		virtual int add(CBaseModule *child);
 		virtual ComponteList getChild();
-		int GetEventList(VxmlEventList& pList);
+		int GetEventList(CEventList& pList);
 		int GetDialogMap(VxmlDialogMap& pMap);
 	/**
 	* @ Attributes ..
@@ -59,11 +59,11 @@ class VxmlDocument: public CBaseModule{
 /**
 	@author Y.Sun <sunyan@hit.edu.cn>
 */
-class VxmlMenu : public CBaseModule
+class CMenuModule : public CBaseModule
 {
 	public:
-		VxmlMenu();
-		~VxmlMenu();
+		CMenuModule();
+		~CMenuModule();
 		virtual void Accept(VxmlAbsInterpreter *interpreter);
 		virtual int add(CBaseModule *child);
 		virtual ComponteList getChild();
@@ -102,7 +102,7 @@ class VxmlMenu : public CBaseModule
 };
 
 /**
-* @class VxmlPrompt
+* @class CPromptModule
 * @brief Queue speech synthesis and audio output to the user
 * The <prompt> element controls the output of synthesized speech and prerecorded audio.
 * Conceptually, prompts are instantaneously queued for play, so interpretation proceeds 
@@ -112,11 +112,11 @@ class VxmlMenu : public CBaseModule
 *
 * @author Y.Sun <sunyan@hit.edu.cn>
 */
-class VxmlPrompt: public CBaseModule{
+class CPromptModule: public CBaseModule{
 	public:
-		VxmlPrompt();
+		CPromptModule();
 
-		~VxmlPrompt();
+		~CPromptModule();
 		virtual void Accept(VxmlAbsInterpreter *interpreter);
 		virtual int add(CBaseModule *child);
 		virtual ComponteList getChild();
@@ -166,8 +166,7 @@ private:
 	string Text;
 };
 
-
-
+#if 0
 /**
 * @class VxmlObject
 * @brief Interact with a custom extension
@@ -240,15 +239,16 @@ class VxmlObject : public CBaseModule
 	*/
 
 };
+#endif
 
     /**
     	@author Y.Sun <sunyan@hit.edu.cn>
     */
-class VxmlChoice : public CBaseModule {
+class CChoiceModule : public CBaseModule {
 public:
-        VxmlChoice();
+        CChoiceModule();
 
-        ~VxmlChoice();
+        ~CChoiceModule();
         virtual void Accept(VxmlAbsInterpreter *interpreter);
         virtual int add(CBaseModule *child);
         virtual ComponteList getChild();

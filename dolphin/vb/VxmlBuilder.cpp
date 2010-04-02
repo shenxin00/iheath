@@ -191,7 +191,7 @@ cout << "\t" << attrName << " = " << attrValue<< endl;
 
 	CBaseModule* VxmlBuilder::BuildDocument(char* value) {
 		if(_VxmlDoc == NULL){
-			_VxmlDoc = new VxmlDocument();
+			_VxmlDoc = new CDocumentModule();
 			_VxmlDoc->_Value = value;
 			_VxmlDoc->Type = TYPE_DOCUMENT;
 		}else{
@@ -203,7 +203,7 @@ cout << "\t" << attrName << " = " << attrValue<< endl;
 	
 	
 	CBaseModule* VxmlBuilder::BuildMenu(CBaseModule* parent, char* value) {
-		VxmlMenu* componte = new VxmlMenu();
+		CMenuModule* componte = new CMenuModule();
 		componte->_Value = value;
 		parent->add(componte);
 		componte->Type = TYPE_MENU;
@@ -211,24 +211,17 @@ cout << "\t" << attrName << " = " << attrValue<< endl;
 
 	}
 	CBaseModule* VxmlBuilder::BuildPrompt(CBaseModule* parent, char* value) {
-		VxmlPrompt* componte = new VxmlPrompt();
+		CPromptModule* componte = new CPromptModule();
 		componte->_Value = value;
 		parent->add(componte);
 		componte->Type = TYPE_PROMPT;
 		return componte;
 	}
 	CBaseModule* VxmlBuilder::BuildChoice(CBaseModule* :parent, char* value) {
-		VxmlChoice* componte = new VxmlChoice();
+		CChoiceModule* componte = new CChoiceModule();
 		componte->_Value = value;
 		parent->add(componte);
 		componte->Type = TYPE_CHOICE;
-		return componte;
-	}
-	CBaseModule* VxmlBuilder::BuildObject(CBaseModule* parent, char* value) {
-		VxmlObject* componte = new VxmlObject();
-		componte->_Value = value;
-		parent->add(componte);
-		componte->Type = TYPE_OBJECT;
 		return componte;
 	}
 /*
@@ -240,7 +233,7 @@ cout << "\t" << attrName << " = " << attrValue<< endl;
 		return componte;
 	}
 */
-	VxmlDocument* VxmlBuilder::getProduct() {
+	CDocumentModule* VxmlBuilder::getProduct() {
 		return _VxmlDoc;
 	}
 

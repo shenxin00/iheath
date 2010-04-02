@@ -16,13 +16,12 @@
 			VxmlInterpreter();
 
 			~VxmlInterpreter();
-			virtual void ExecComponte ( VxmlDocument* doc );
-			virtual void ExecComponte ( VxmlMenu* doc );
-			virtual void ExecComponte ( VxmlPrompt* doc );
-			virtual void ExecComponte ( VxmlChoice* doc );
-			virtual void ExecComponte ( VxmlObject* doc );
+			virtual void ExecComponte ( CDocumentModule* doc );
+			virtual void ExecComponte ( CMenuModule* doc );
+			virtual void ExecComponte ( CPromptModule* doc );
+			virtual void ExecComponte ( CChoiceModule* doc );
 	private:
-		VxmlEventList _EventStack;
+		CEventList _EventStack;
 		VxmlDialogMap _DialogMap;
 		string		 _InputChoice;
         VxmlPlatForm  _PlatForm;

@@ -14,7 +14,7 @@ class VxmlParser {
 	public:
 		VxmlParser();
 		~VxmlParser();
-		VxmlDocument* DoParser(string& file);
+		CDocumentModule* DoParser(string& file);
 	private:
 		VxmlBuilder	*		_Builder;
 		VxmlSAXHandler*	_SAXHandler;

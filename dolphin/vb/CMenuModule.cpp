@@ -4,28 +4,28 @@
 
 
 
-    VxmlMenu::VxmlMenu()
+    CMenuModule::CMenuModule()
 : CBaseModule() {
     }
 
 
-    VxmlMenu::~VxmlMenu() {
+    CMenuModule::~CMenuModule() {
     }
-    void VxmlMenu::Accept(VxmlAbsInterpreter *interpreter) {
+    void CMenuModule::Accept(VxmlAbsInterpreter *interpreter) {
         interpreter->ExecComponte(this);
         return;
     }
-    int VxmlMenu::add(CBaseModule *child) {
+    int CMenuModule::add(CBaseModule *child) {
         _Child.push_back(child);
         return 0;
     }
-    ComponteList VxmlMenu::getChild() {
+    ComponteList CMenuModule::getChild() {
 
         return _Child;
     }
 
 
-    PromptItemVector VxmlMenu::collectPrompts(){
+    PromptItemVector CMenuModule::collectPrompts(){
         PromptItemVector prompts;
         ComponteList::iterator it;
         for ( it=_Child.begin() ; it != _Child.end(); it++ ) {
