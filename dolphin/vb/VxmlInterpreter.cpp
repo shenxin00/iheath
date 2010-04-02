@@ -5,7 +5,7 @@
 #include <iostream>
 #include <string>
 
-#include "VxmlComponte.h"
+#include "CVxmlModules.h"
 
 #include "VxmlPlatForm.h"
 
@@ -40,7 +40,7 @@
 			try{
 				(*it)->Accept(this);
 			}catch(string next){
-				VxmlAbsComponte* nextDialog = NULL;
+				CBaseModule* nextDialog = NULL;
 				nextDialog = CheckNext(next);
 				if(nextDialog!=NULL){
 					it = getNext(nextDialog,children);
@@ -53,7 +53,7 @@
 
 		return;
 	}
-	ComponteList::iterator VxmlInterpreter::getNext(VxmlAbsComponte* nextDialog,ComponteList children){
+	ComponteList::iterator VxmlInterpreter::getNext(CBaseModule* nextDialog,ComponteList children){
 			ComponteList::iterator it;
 			for ( it=children.begin() ; it != children.end(); it++ ) {
 				if((*it)==nextDialog){
@@ -62,7 +62,7 @@
 			}
 			return it;
 	}
-	VxmlAbsComponte* VxmlInterpreter::CheckNext(string& next){
+	CBaseModule* VxmlInterpreter::CheckNext(string& next){
 		VxmlDialogMap::iterator it;
 		for ( it=_DialogMap.begin() ; it != _DialogMap.end(); it++ ) {
 			if(next.compare((*it).first)){

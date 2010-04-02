@@ -1,6 +1,6 @@
 #ifndef Vxml_VxmlCOMPONTE_H
 #define Vxml_VxmlCOMPONTE_H
-#include "VxmlAbsComponte.h"
+#include "CBaseModule.h"
 #include "comm.h"
 
 
@@ -10,8 +10,8 @@
 struct VxmlEvent
 {
 	int Type;
-	VxmlAbsComponte *Scope;
-	VxmlAbsComponte *context;
+	CBaseModule *Scope;
+	CBaseModule *context;
 };
 
 #define VxmlEventList list<struct VxmlEvent*>
@@ -21,12 +21,12 @@ struct VxmlEvent
 /**
 	@author Y.Sun <sunyan@hit.edu.cn>
 */
-class VxmlDocument: public VxmlAbsComponte{
+class VxmlDocument: public CBaseModule{
 	public:
 		VxmlDocument();
 		virtual ~VxmlDocument();
 		virtual void Accept(VxmlAbsInterpreter *interpreter);
-		virtual int add(VxmlAbsComponte *child);
+		virtual int add(CBaseModule *child);
 		virtual ComponteList getChild();
 		int GetEventList(VxmlEventList& pList);
 		int GetDialogMap(VxmlDialogMap& pMap);
@@ -59,13 +59,13 @@ class VxmlDocument: public VxmlAbsComponte{
 /**
 	@author Y.Sun <sunyan@hit.edu.cn>
 */
-class VxmlMenu : public VxmlAbsComponte
+class VxmlMenu : public CBaseModule
 {
 	public:
 		VxmlMenu();
 		~VxmlMenu();
 		virtual void Accept(VxmlAbsInterpreter *interpreter);
-		virtual int add(VxmlAbsComponte *child);
+		virtual int add(CBaseModule *child);
 		virtual ComponteList getChild();
 		PromptItemVector collectPrompts();
 	/**
@@ -112,13 +112,13 @@ class VxmlMenu : public VxmlAbsComponte
 *
 * @author Y.Sun <sunyan@hit.edu.cn>
 */
-class VxmlPrompt: public VxmlAbsComponte{
+class VxmlPrompt: public CBaseModule{
 	public:
 		VxmlPrompt();
 
 		~VxmlPrompt();
 		virtual void Accept(VxmlAbsInterpreter *interpreter);
-		virtual int add(VxmlAbsComponte *child);
+		virtual int add(CBaseModule *child);
 		virtual ComponteList getChild();
 		string getText();
 	/**
@@ -178,14 +178,14 @@ private:
 * <object> has prompts and catch elements. It may also have <filled> actions
 * @author Y.Sun <sunyan@hit.edu.cn>
 */
-class VxmlObject : public VxmlAbsComponte
+class VxmlObject : public CBaseModule
 {
 	public:
 		VxmlObject();
 
 		~VxmlObject();
 
-		virtual int add(VxmlAbsComponte* child);
+		virtual int add(CBaseModule* child);
 		virtual ComponteList getChild();
 		virtual void Accept(VxmlAbsInterpreter* interpreter);
 
@@ -194,63 +194,63 @@ class VxmlObject : public VxmlAbsComponte
 	*/
 	public:
 
-/**< @brief
-* When the object is evaluated, it sets this variable to an ECMAScript value
-* whose type is defined by the object.
-*/
-string name;
+	/**< @brief
+	* When the object is evaluated, it sets this variable to an ECMAScript value
+	* whose type is defined by the object.
+	*/
+	string name;
 
-/**< @brief	The initial value of the form item variable; default is ECMAScript undefined. If initialized to a value, then the form item will not be visited unless the form item variable is cleared.
-string expr;
-/**< @brief
-An expression that must evaluate to true after conversion to boolean in order for the form item to be visited.
-*/
-string cond;
-/**< @brief The URI specifying the location of the object's implementation. The URI conventions are platform-dependent.
-*/
+	/**< @brief	The initial value of the form item variable; default is ECMAScript undefined. If initialized to a value, then the form item will not be visited unless the form item variable is cleared.
+	string expr;
+	/**< @brief
+	An expression that must evaluate to true after conversion to boolean in order for the form item to be visited.
+	*/
+	string cond;
+	/**< @brief The URI specifying the location of the object's implementation. The URI conventions are platform-dependent.
+	*/
 
-string classid;
-/**< @brief The base path used to resolve relative URIs specified by classid, data, and archive. It defaults to the base URI of the current document.
-*/
-string codebase;
-/**< @brief The content type of data expected when downloading the object specified by classid. When absent it defaults to the value of the type attribute.
-*/
-int codetype;
-/**< @brief The URI specifying the location of the object's data. If it is a relative URI, it is interpreted relative to the codebase attribute.
-*/
-string data;
-/**< @brief The content type of the data specified by the data attribute.
-*/
-int type;
-/**< @brief A space-separated list of URIs for archives containing resources relevant to the object, which may include the resources specified by the classid and data attributes. URIs which are relative are interpreted relative to the codebase attribute.
-*/
-string archive;
-/**< @brief See Section 6.1. This defaults to the objectfetchhint property.
-*/
-fetchhint;
-/**< @brief See Section 6.1. This defaults to the fetchtimeout property.
-*/
-fetchtimeout;
-/**< @brief See Section 6.1. This defaults to the objectmaxage property.
-*/
-maxage;
-/**< @briefSee Section 6.1. This defaults to the objectmaxstale property.
-*/
- maxstale;
-*/
+	string classid;
+	/**< @brief The base path used to resolve relative URIs specified by classid, data, and archive. It defaults to the base URI of the current document.
+	*/
+	string codebase;
+	/**< @brief The content type of data expected when downloading the object specified by classid. When absent it defaults to the value of the type attribute.
+	*/
+	int codetype;
+	/**< @brief The URI specifying the location of the object's data. If it is a relative URI, it is interpreted relative to the codebase attribute.
+	*/
+	string data;
+	/**< @brief The content type of the data specified by the data attribute.
+	*/
+	int type;
+	/**< @brief A space-separated list of URIs for archives containing resources relevant to the object, which may include the resources specified by the classid and data attributes. URIs which are relative are interpreted relative to the codebase attribute.
+	*/
+	string archive;
+	/**< @brief See Section 6.1. This defaults to the objectfetchhint property.
+	*/
+	fetchhint;
+	/**< @brief See Section 6.1. This defaults to the fetchtimeout property.
+	*/
+	fetchtimeout;
+	/**< @brief See Section 6.1. This defaults to the objectmaxage property.
+	*/
+	maxage;
+	/**< @briefSee Section 6.1. This defaults to the objectmaxstale property.
+	*/
+	 maxstale;
+	*/
 
 };
 
     /**
     	@author Y.Sun <sunyan@hit.edu.cn>
     */
-class VxmlChoice : public VxmlAbsComponte {
+class VxmlChoice : public CBaseModule {
 public:
         VxmlChoice();
 
         ~VxmlChoice();
         virtual void Accept(VxmlAbsInterpreter *interpreter);
-        virtual int add(VxmlAbsComponte *child);
+        virtual int add(CBaseModule *child);
         virtual ComponteList getChild();
 		
 		

@@ -1,11 +1,11 @@
 
 
-#include "VxmlComponte.h"
+#include "CVxmlModules.h"
 
 
 
     VxmlMenu::VxmlMenu()
-: VxmlAbsComponte() {
+: CBaseModule() {
     }
 
 
@@ -15,7 +15,7 @@
         interpreter->ExecComponte(this);
         return;
     }
-    int VxmlMenu::add(VxmlAbsComponte *child) {
+    int VxmlMenu::add(CBaseModule *child) {
         _Child.push_back(child);
         return 0;
     }

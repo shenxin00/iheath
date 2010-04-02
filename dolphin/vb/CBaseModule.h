@@ -1,5 +1,5 @@
-#ifndef VxmlVxmlABSCOMPONTE_H
-#define VxmlVxmlABSCOMPONTE_H
+#ifndef VxmlCBaseModule_H
+#define VxmlCBaseModule_H
 
 
 #include <list>
@@ -13,7 +13,7 @@
 using namespace std;
 
 
-#define ComponteList list<VxmlAbsComponte*>
+#define ComponteList list<CBaseModule*>
 
 #define TYPE_DOCUMENT	0
 #define TYPE_MENU			1
@@ -37,20 +37,19 @@ using namespace std;
 	
 
 	/**
-	* @author sunyan <sunyan@optimedia.co.jp>
+	* @author sunyan <sunyan@hit.edu.cn>
 	*/
-	class VxmlAbsComponte {
-public:
+class CBaseModule
+{
+	public:
 		int Type;
 		int Index;
-
-		VxmlAbsComponte();
-
-		~VxmlAbsComponte();
-
+		CBaseModule();
+		~CBaseModule();
 		virtual void Accept(VxmlAbsInterpreter *interpreter);
-		virtual int add(VxmlAbsComponte *child);
+		virtual int add(CBaseModule *child);
 		virtual ComponteList getChild();
+
 //protected:
 //		DOMNode* _Node;
 		string			_Value;
@@ -58,7 +57,7 @@ public:
 	};
 
 
-#define VxmlDialogMap map<string,VxmlAbsComponte*>
+#define VxmlDialogMap map<string,CBaseModule*>
 
 #endif
 

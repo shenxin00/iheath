@@ -3,12 +3,12 @@
 
 
 #include "comm.h"
-#include "VxmlComponte.h"
+#include "CVxmlModules.h"
 #include "VxmlBuilder.h"
 #include "VxmlSAXHandler.h"
 
 /**
-	@author sunyan <sunyan@optimedia.co.jp>
+	@author sunyan <sunyan@hit.edu.cn>
 */
 class VxmlParser {
 	public:

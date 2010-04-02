@@ -10,7 +10,7 @@
 	class VxmlChoice;
 	class VxmlObject;
 	/**
-		@author sunyan <sunyan@optimedia.co.jp>
+		@author sunyan <sunyan@hit.edu.cn>
 	*/
 	class VxmlAbsInterpreter
 	{
