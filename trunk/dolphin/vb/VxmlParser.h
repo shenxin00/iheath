@@ -2,7 +2,7 @@
 #define VxmlVxmlPARSER_H
 
 
-#include "comm.h"
+#include "VbCommon.h"
 #include "CVxmlModules.h"
 #include "VxmlBuilder.h"
 #include "VxmlSAXHandler.h"

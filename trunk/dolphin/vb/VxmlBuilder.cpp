@@ -1,7 +1,5 @@
 
 
-#include <cctype>
-#include <algorithm>
 #include "VxmlBuilder.h"
 #include "CVxmlModules.h"
 
