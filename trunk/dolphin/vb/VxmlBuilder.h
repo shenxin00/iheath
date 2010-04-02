@@ -2,7 +2,7 @@
 #define VxmlVxmlBUILDER_H
 
 #include "comm.h"
-#include "VxmlComponte.h"
+#include "CVxmlModules.h"
 
 using namespace std;
 
@@ -10,19 +10,19 @@ using namespace std;
 
 
 	/**
-		@author sunyan <sunyan@optimedia.co.jp>
+		@author sunyan <sunyan@hit.edu.cn>
 	*/
 	class VxmlBuilder {
 		public:
 			VxmlBuilder();
 
 			~VxmlBuilder();
-			VxmlAbsComponte* BuildDocument(char* value);
-			VxmlAbsComponte* BuildMenu(VxmlAbsComponte* parent, char* value);
-			VxmlAbsComponte* BuildPrompt(VxmlAbsComponte* parent, char* value);
-			VxmlAbsComponte* BuildChoice(VxmlAbsComponte* parent, char* value);
-			VxmlAbsComponte* BuildObject(VxmlAbsComponte* parent, char* value);
-			VxmlAbsComponte* BuildNoinput(VxmlAbsComponte* parent, char* value);
+			CBaseModule* BuildDocument(char* value);
+			CBaseModule* BuildMenu(CBaseModule* parent, char* value);
+			CBaseModule* BuildPrompt(CBaseModule* parent, char* value);
+			CBaseModule* BuildChoice(CBaseModule* parent, char* value);
+			CBaseModule* BuildObject(CBaseModule* parent, char* value);
+			CBaseModule* BuildNoinput(CBaseModule* parent, char* value);
 
 			VxmlDocument* getProduct();
 		

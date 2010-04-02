@@ -2,13 +2,13 @@
 #define VxmlVxmlINTERPRETER_H
 
 #include "VxmlAbsInterpreter.h"
-#include "VxmlComponte.h"
+#include "CVxmlModules.h"
 
 #include "VxmlPlatForm.h"
 
 
 	/**
-		@author sunyan <sunyan@optimedia.co.jp>
+		@author sunyan <sunyan@hit.edu.cn>
 	*/
 	class VxmlInterpreter:public VxmlAbsInterpreter
 	{
@@ -27,8 +27,8 @@
 		string		 _InputChoice;
         VxmlPlatForm  _PlatForm;
     
-		VxmlAbsComponte* CheckNext(string& next);
-		ComponteList::iterator getNext(VxmlAbsComponte* nextDialog,ComponteList children);
+		CBaseModule* CheckNext(string& next);
+		ComponteList::iterator getNext(CBaseModule* nextDialog,ComponteList children);
 
 	};
 

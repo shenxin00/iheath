@@ -1,6 +1,6 @@
 
 
-#include "VxmlComponte.h"
+#include "CVxmlModules.h"
 
 
 
@@ -12,13 +12,13 @@
     }
 
 
-    int VxmlObject::add(VxmlAbsComponte* child) {
+    int VxmlObject::add(CBaseModule* child) {
         _Child.push_back(child);
         return 0;;
     }
 
     ComponteList VxmlObject::getChild() {
-        return VxmlAbsComponte::getChild();
+        return CBaseModule::getChild();
     }
 
     void VxmlObject::Accept(VxmlAbsInterpreter* interpreter) {

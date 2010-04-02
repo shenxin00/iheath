@@ -1,6 +1,6 @@
 
 
-#include "VxmlComponte.h"
+#include "CVxmlModules.h"
 
 VxmlDocument::VxmlDocument()
 {
@@ -16,7 +16,7 @@ void VxmlDocument::Accept(VxmlAbsInterpreter *interpreter){
 
 	return;
 }
-int VxmlDocument::add(VxmlAbsComponte *child){
+int VxmlDocument::add(CBaseModule *child){
 	_Child.push_back(child);
 	return 0;
 }
@@ -45,10 +45,10 @@ int VxmlDocument::GetDialogMap(VxmlDialogMap& pMap){
 	for ( it=_Child.begin() ; it != _Child.end(); it++ ) {
 		if((*it)->Type = TYPE_MENU){
 
-			pMap.insert (pair<string,VxmlAbsComponte*>("menuid",this));  
+			pMap.insert (pair<string,CBaseModule*>("menuid",this));  
 		}else if((*it)->Type = TYPE_FORM){
 
-			pMap.insert (pair<string,VxmlAbsComponte*>("formid",this));  
+			pMap.insert (pair<string,CBaseModule*>("formid",this));  
 		}
 	}
 	return 0;

@@ -1,6 +1,6 @@
 
 
-#include "VxmlComponte.h"
+#include "CVxmlModules.h"
 
 
 VxmlChoice::VxmlChoice() {
@@ -17,7 +17,7 @@ void VxmlChoice::Accept(VxmlAbsInterpreter *interpreter){
 	interpreter->ExecComponte(this);
 	return;
 }
-int VxmlChoice::add(VxmlAbsComponte *child){
+int VxmlChoice::add(CBaseModule *child){
 	return 0;
 }
 ComponteList VxmlChoice::getChild(){

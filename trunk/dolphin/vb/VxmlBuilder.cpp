@@ -3,7 +3,7 @@
 #include <cctype>
 #include <algorithm>
 #include "VxmlBuilder.h"
-#include "VxmlComponte.h"
+#include "CVxmlModules.h"
 
 
 VxmlTag VxmlTagArray[TAG_NUM] = {
@@ -189,7 +189,7 @@ cout << "\t" << attrName << " = " << attrValue<< endl;
 	
 	}
 
-	VxmlAbsComponte* VxmlBuilder::BuildDocument(char* value) {
+	CBaseModule* VxmlBuilder::BuildDocument(char* value) {
 		if(_VxmlDoc == NULL){
 			_VxmlDoc = new VxmlDocument();
 			_VxmlDoc->_Value = value;
@@ -202,7 +202,7 @@ cout << "\t" << attrName << " = " << attrValue<< endl;
 	}
 	
 	
-	VxmlAbsComponte* VxmlBuilder::BuildMenu(VxmlAbsComponte* parent, char* value) {
+	CBaseModule* VxmlBuilder::BuildMenu(CBaseModule* parent, char* value) {
 		VxmlMenu* componte = new VxmlMenu();
 		componte->_Value = value;
 		parent->add(componte);
@@ -210,21 +210,21 @@ cout << "\t" << attrName << " = " << attrValue<< endl;
 		return componte;
 
 	}
-	VxmlAbsComponte* VxmlBuilder::BuildPrompt(VxmlAbsComponte* parent, char* value) {
+	CBaseModule* VxmlBuilder::BuildPrompt(CBaseModule* parent, char* value) {
 		VxmlPrompt* componte = new VxmlPrompt();
 		componte->_Value = value;
 		parent->add(componte);
 		componte->Type = TYPE_PROMPT;
 		return componte;
 	}
-	VxmlAbsComponte* VxmlBuilder::BuildChoice(VxmlAbsComponte* :parent, char* value) {
+	CBaseModule* VxmlBuilder::BuildChoice(CBaseModule* :parent, char* value) {
 		VxmlChoice* componte = new VxmlChoice();
 		componte->_Value = value;
 		parent->add(componte);
 		componte->Type = TYPE_CHOICE;
 		return componte;
 	}
-	VxmlAbsComponte* VxmlBuilder::BuildObject(VxmlAbsComponte* parent, char* value) {
+	CBaseModule* VxmlBuilder::BuildObject(CBaseModule* parent, char* value) {
 		VxmlObject* componte = new VxmlObject();
 		componte->_Value = value;
 		parent->add(componte);
@@ -232,7 +232,7 @@ cout << "\t" << attrName << " = " << attrValue<< endl;
 		return componte;
 	}
 /*
-	VxmlAbsComponte* VxmlBuilder::BuildNoinput(VxmlAbsComponte* parent, char* value) {
+	CBaseModule* VxmlBuilder::BuildNoinput(CBaseModule* parent, char* value) {
 		VxmlNoinput* componte = new VxmlNoinput();
 		componte->_Value = node;
 		parent->add(componte);

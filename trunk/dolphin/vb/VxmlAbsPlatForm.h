@@ -17,7 +17,7 @@ using namespace std;
 	
 
     /**
-    	@author sunyan <sunyan@optimedia.co.jp>
+    	@author sunyan <sunyan@hit.edu.cn>
     */
     class VxmlAbsPlatForm {
 public:
@@ -28,7 +28,7 @@ public:
 
         virtual int QueuePrompts(PromptItemVector prompts);
 /*
-        virtual int callObject(VxmlAbsComponte *child);
+        virtual int callObject(CBaseModule *child);
         virtual int setProptety(string name,string value);
  */
    };

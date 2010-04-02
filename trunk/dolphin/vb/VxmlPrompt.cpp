@@ -1,6 +1,6 @@
 
 
-#include "VxmlComponte.h"
+#include "CVxmlModules.h"
 
 
 
@@ -17,7 +17,7 @@
 	{
 		interpreter->ExecComponte ( this );
 	}
-	int VxmlPrompt::add ( VxmlAbsComponte *child )
+	int VxmlPrompt::add ( CBaseModule *child )
 	{
 		_Child.push_back ( child );
 		return 0;

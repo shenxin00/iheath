@@ -1,4 +1,4 @@
-#include "VxmlComponte.h"
+#include "CVxmlModules.h"
 
 VxmlEvent::VxmlEvent(void)
 {
