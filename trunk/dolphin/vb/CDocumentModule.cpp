@@ -2,34 +2,34 @@
 
 #include "CVxmlModules.h"
 
-VxmlDocument::VxmlDocument()
+CDocumentModule::CDocumentModule()
 {
 }
 
 
-VxmlDocument::~VxmlDocument()
+CDocumentModule::~CDocumentModule()
 {
 }
-void VxmlDocument::Accept(VxmlAbsInterpreter *interpreter){
+void CDocumentModule::Accept(VxmlAbsInterpreter *interpreter){
         interpreter->ExecComponte(this);
         ComponteList::iterator it;
 
 	return;
 }
-int VxmlDocument::add(CBaseModule *child){
+int CDocumentModule::add(CBaseModule *child){
 	_Child.push_back(child);
 	return 0;
 }
-ComponteList VxmlDocument::getChild(){
+ComponteList CDocumentModule::getChild(){
 
 	return _Child;
 }
 
-int VxmlDocument::GetEventList(VxmlEventList& pList){
+int CDocumentModule::GetEventList(CEventList& pList){
 	ComponteList::iterator it;
 	for ( it=_Child.begin() ; it != _Child.end(); it++ ) {
 		if((*it)->Type = TYPE_NOINPUT){
-			VxmlEvent *pevent = new VxmlEvent;
+			CEvent *pevent = new CEvent;
 			pevent->Type = TYPE_NOINPUT;
 			pevent->Scope = this;
 			pevent->context = (*it);
@@ -39,7 +39,7 @@ int VxmlDocument::GetEventList(VxmlEventList& pList){
 	return 0;
 }
 
-int VxmlDocument::GetDialogMap(VxmlDialogMap& pMap){
+int CDocumentModule::GetDialogMap(VxmlDialogMap& pMap){
 	ComponteList::iterator it;
 	//string = 
 	for ( it=_Child.begin() ; it != _Child.end(); it++ ) {

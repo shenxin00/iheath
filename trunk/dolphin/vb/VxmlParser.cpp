@@ -28,7 +28,7 @@ XERCES_CPP_NAMESPACE_USE
 		delete _SAXHandler;	
 	}
 
-	VxmlDocument* VxmlParser::DoParser(string& file) {
+	CDocumentModule* VxmlParser::DoParser(string& file) {
 
 		/// @todo implement me
 		try {

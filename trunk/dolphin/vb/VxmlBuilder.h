@@ -21,10 +21,9 @@ using namespace std;
 			CBaseModule* BuildMenu(CBaseModule* parent, char* value);
 			CBaseModule* BuildPrompt(CBaseModule* parent, char* value);
 			CBaseModule* BuildChoice(CBaseModule* parent, char* value);
-			CBaseModule* BuildObject(CBaseModule* parent, char* value);
 			CBaseModule* BuildNoinput(CBaseModule* parent, char* value);
 
-			VxmlDocument* getProduct();
+			CDocumentModule* getProduct();
 		
 			//interface
 			int BuildElement(char* tagName);
@@ -32,7 +31,7 @@ using namespace std;
 			
 		private:
 			int getTagID(string& tagName);
-			VxmlDocument* _VxmlDoc;
+			CDocumentModule* _VxmlDoc;
 			VxmlTagIDMap  _VxmlTagIDMap;
 	};
 

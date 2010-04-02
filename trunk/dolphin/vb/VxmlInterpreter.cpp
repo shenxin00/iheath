@@ -20,12 +20,12 @@
 	VxmlInterpreter::~VxmlInterpreter()
 	{
 	}
-	void VxmlInterpreter::ExecComponte ( VxmlDocument* doc )
+	void VxmlInterpreter::ExecComponte ( CDocumentModule* doc )
 	{
-		cout << "VxmlDocument:" << endl;
+		cout << "CDocumentModule:" << endl;
 		ComponteList children;
 		ComponteList::iterator it;
-		//VxmlEventList EventList;
+		//CEventList EventList;
 		doc->GetEventList(_EventStack);
 		
 		doc->GetDialogMap(_DialogMap);
@@ -72,11 +72,11 @@
 		return NULL;
 	}
 
-	void VxmlInterpreter::ExecComponte ( VxmlMenu* menu )
+	void VxmlInterpreter::ExecComponte ( CMenuModule* menu )
 	{
 		ComponteList children;
 		PromptItemVector::iterator it;
-		cout << "VxmlMenu:" << endl;
+		cout << "CMenuModule:" << endl;
 
         PromptItemVector prompts = menu->collectPrompts();
 
@@ -100,27 +100,22 @@
 
 		return;
 	}
-	void VxmlInterpreter::ExecComponte ( VxmlPrompt* prompt )
+	void VxmlInterpreter::ExecComponte ( CPromptModule* prompt )
 	{
-		cout << "VxmlPrompt:" << endl;
+		cout << "CPromptModule:" << endl;
 		cout << prompt->getText() << endl;
 		return;
 
 	}
-	void VxmlInterpreter::ExecComponte ( VxmlChoice* choice )
+	void VxmlInterpreter::ExecComponte ( CChoiceModule* choice )
 	{
-		cout << "VxmlChoice:" << endl;
+		cout << "CChoiceModule:" << endl;
 		string key =choice->getChoice();
 
 		if(key.compare(_InputChoice) == 0){
 
 			throw choice->getNext();
 		}
-	}
-	void VxmlInterpreter::ExecComponte ( VxmlObject* ob )
-	{
-		cout << "VxmlObject:" << endl;
-		return;
 	}
 
 
