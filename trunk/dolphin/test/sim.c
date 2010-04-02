@@ -42,7 +42,7 @@ int handleClientAction(){
 	// trim "\n" 
 	if(action == 10){
 		return OK_RTN;
-	}
+	}MaruoBack
 	
 	sendparam.action = action;
 	sendToSB(&sendparam);
@@ -51,6 +51,7 @@ int handleClientAction(){
 
 
 }
+
 
 void* thread_func(void *arg){;
 	struct FromSBParam param;
