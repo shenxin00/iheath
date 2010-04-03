@@ -48,7 +48,7 @@ typedef enum EN_VXML_TAG_ID{
 	TAG_ID_VAR,				///< < <var>				Declare a variable
 	TAG_ID_VXML,			///< < <vxml>				Top-level element in each VoiceXML document
 	TAG_NUM
-}enVxmlTagID;
+}TVxmlTagID;
 
 
 

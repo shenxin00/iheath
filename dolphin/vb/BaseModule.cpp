@@ -1,19 +1,79 @@
 #include "CBaseModule.h"
 
-	CBaseModule::CBaseModule() {
-	}
 
 
-	CBaseModule::~CBaseModule() {
-	}
-	void CBaseModule::Accept(VxmlAbsInterpreter* interpreter) {
-		return;
-	}
-	int CBaseModule::add(CBaseModule* child) {
-		_Child.push_back(child);
-		return 0;
-	}
-	ComponteList CBaseModule::getChild() {
-		return _Child;    
-	}
+/**
+* @brief 
+* @note 
+* 
+* @param[out] 
+* @param[in] 
+* @param[in] 
+* \exception 
+* \return 
+*/
+CBaseModule::CBaseModule() {
+
+}
+
+
+/**
+* @brief 
+* @note 
+* 
+* @param[out] 
+* @param[in] 
+* @param[in] 
+* \exception 
+* \return 
+*/
+CBaseModule::~CBaseModule() {
+
+}
+
+
+/**
+* @brief 
+* @note 
+* 
+* @param[out] 
+* @param[in] 
+* @param[in] 
+* \exception 
+* \return 
+*/
+void CBaseModule::Accept(VxmlAbsInterpreter* interpreter) {
+	return;
+}
+
+
+/**
+* @brief 
+* @note 
+* 
+* @param[out] 
+* @param[in] 
+* @param[in] 
+* \exception 
+* \return 
+*/
+int CBaseModule::add(CBaseModule* child) {
+	_Child.push_back(child);
+	return 0;
+}
+
+
+/**
+* @brief 
+* @note 
+* 
+* @param[out] 
+* @param[in] 
+* @param[in] 
+* \exception 
+* \return 
+*/
+ComponteList CBaseModule::getChild() {
+	return _Child;    
+}
 

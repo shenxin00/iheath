@@ -1,8 +1,18 @@
 #ifndef _COMM_H_
 #define _COMM_H_
 
+
+/* std libriary	*/
+#include <list>
+#include <map>
+#include <string>
 #include <iostream>
+
+#include "VbComTypes.h"
+
 using namespace std;
+
+
 #define DEBUG
 
 #ifdef DEBUG

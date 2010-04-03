@@ -1,25 +1,21 @@
-#ifndef Vxml_VxmlCOMPONTE_H
-#define Vxml_VxmlCOMPONTE_H
-#include "CBaseModule.h"
-#include "VbCommon.h"
-
-
-
-
-
-struct CEvent
-{
-	int Type;
-	CBaseModule *Scope;
-	CBaseModule *context;
-};
-
-#define CEventList list<struct CEvent*>
-
+#ifndef _VXML_MODULES_H_
+#define _VXML_MODULES_H_
 
 
 /**
-	@author Y.Sun <sunyan@hit.edu.cn>
+* Header files
+*/
+#include "VbCommon.h"
+#include "CBaseModule.h"
+
+
+/**
+* @class CDocumentModule
+* @brief Document execution begins at the first dialog by default.
+* As each dialog executes, it determines the next dialog.
+* When a dialog doesn't specify a successor dialog, document execution stops.
+*
+* @author Y.Sun <sunyan@hit.edu.cn>
 */
 class CDocumentModule: public CBaseModule{
 	public:
@@ -57,7 +53,14 @@ class CDocumentModule: public CBaseModule{
 
 
 /**
-	@author Y.Sun <sunyan@hit.edu.cn>
+* @class CMenuModule
+* @brief A menu is a convenient syntactic shorthand for a form 
+* which containing a single anonymous field that prompts the user to make a choice and
+* transitions to different places based on that choice.
+* Like a regular form, it can have its grammar scoped such that it is active when
+* the user is executing another dialog.
+*
+* @author Y.Sun <sunyan@hit.edu.cn>
 */
 class CMenuModule : public CBaseModule
 {
