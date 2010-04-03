@@ -1,64 +1,45 @@
-#ifndef VxmlCBaseModule_H
-#define VxmlCBaseModule_H
+#ifndef _BASE_MODULES_H_
+#define _BASE_MODULES_H_
 
 
-#include <list>
-#include <map>
-#include <string>
-#include <iostream>
-
-
+/**
+* Header files
+*/
+#include "VbCommon.h"
 #include "VxmlAbsInterpreter.h"
 
-using namespace std;
 
-
-#define ComponteList list<CBaseModule*>
-
-#define TYPE_DOCUMENT	0
-#define TYPE_MENU			1
-#define TYPE_FORM			2
-#define TYPE_PROMPT		3
-#define TYPE_CHOICE		4
-#define TYPE_OBJECT		5
-
-#define TYPE_NOINPUT		91
-#define TYPE_NOMCTCH		92
-#define TYPE_ERROR		93
-#define TYPE_CATCH			94
-
-
-
-
-
-
-
-
-	
-
-	/**
-	* @author sunyan <sunyan@hit.edu.cn>
-	*/
+/**
+* @class CBaseModule
+* @brief 
+*
+* @author Y.Sun <sunyan@hit.edu.cn>
+*/
 class CBaseModule
 {
+	/* member functions */
 	public:
-		int Type;
-		int Index;
 		CBaseModule();
 		~CBaseModule();
 		virtual void Accept(VxmlAbsInterpreter *interpreter);
 		virtual int add(CBaseModule *child);
 		virtual ComponteList getChild();
 
-//protected:
+	protected:
 //		DOMNode* _Node;
-		string			_Value;
-		ComponteList	_Child;
+	/* member variables */
+	public:
+		TModuleType enType;			/**< Module's Type */
+		int 		Index;			/**< ??				*/
+
+	private:
+		string			m_strValue;		/**< */
+		ComponteList	m_iChildren;	/**< */
 	};
 
 
 #define VxmlDialogMap map<string,CBaseModule*>
 
-#endif
+#endif //_BASE_MODULES_H_
 
 
