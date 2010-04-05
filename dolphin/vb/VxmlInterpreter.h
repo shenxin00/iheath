@@ -27,7 +27,7 @@
         VxmlPlatForm  _PlatForm;
     
 		CBaseModule* CheckNext(string& next);
-		ComponteList::iterator getNext(CBaseModule* nextDialog,ComponteList children);
+		TModules::iterator getNext(CBaseModule* nextDialog,TModules children);
 
 	};
 

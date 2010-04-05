@@ -22,7 +22,7 @@
 		_Child.push_back ( child );
 		return 0;
 	}
-	ComponteList CPromptModule::getChild()
+	TModules CPromptModule::getChild()
 	{
 
 		return _Child;

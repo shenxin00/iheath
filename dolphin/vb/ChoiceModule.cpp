@@ -20,7 +20,7 @@ void CChoiceModule::Accept(VxmlAbsInterpreter *interpreter){
 int CChoiceModule::add(CBaseModule *child){
 	return 0;
 }
-ComponteList CChoiceModule::getChild(){
+TModules CChoiceModule::getChild(){
 
 	return _Child;
 }

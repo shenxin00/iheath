@@ -23,8 +23,8 @@
 	void VxmlInterpreter::ExecComponte ( CDocumentModule* doc )
 	{
 		cout << "CDocumentModule:" << endl;
-		ComponteList children;
-		ComponteList::iterator it;
+		TModules children;
+		TModules::iterator it;
 		//CEventList EventList;
 		doc->GetEventList(_EventStack);
 		
@@ -53,8 +53,8 @@
 
 		return;
 	}
-	ComponteList::iterator VxmlInterpreter::getNext(CBaseModule* nextDialog,ComponteList children){
-			ComponteList::iterator it;
+	TModules::iterator VxmlInterpreter::getNext(CBaseModule* nextDialog,TModules children){
+			TModules::iterator it;
 			for ( it=children.begin() ; it != children.end(); it++ ) {
 				if((*it)==nextDialog){
 					return it;
@@ -74,7 +74,7 @@
 
 	void VxmlInterpreter::ExecComponte ( CMenuModule* menu )
 	{
-		ComponteList children;
+		TModules children;
 		PromptItemVector::iterator it;
 		cout << "CMenuModule:" << endl;
 
