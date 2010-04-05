@@ -20,7 +20,7 @@ class CBaseModule
 	/* member functions */
 	public:
 		CBaseModule();
-		~CBaseModule();
+		virtual ~CBaseModule();
 		
 		/**
 		* @brief add a sub module to current module.
