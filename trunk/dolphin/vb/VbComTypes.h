@@ -3,33 +3,14 @@
 
 
 
-/* linked list of VxmlModules (document sorted)*/
-typedef list<CBaseModule*> TModulesList;
+/** vxml modules's attribute list(map)				*/
+typedef map<string,string> TAttributes;
+/** vxml modules's attribute list(map)				*/
+typedef pair<string,string> Attribute;
 
-typedef map<string,CBaseModule*> VxmlDialogMap;
+/** linked list of VxmlModules (document sorted)	*/
+typedef vector<CBaseModule*> TModules;
 
-
-typedef struct ST_PROMPT_ITEM {
-	int _Type;
-	string _Value;
-}TPromptItem;
-
-
-
-
-
-
-typedef list<PromptItem> PromptItemVector
-
-
-struct CEvent
-{
-	int Type;
-	CBaseModule *Scope;
-	CBaseModule *context;
-};
-
-typedef list<struct CEvent*> CEventList;
 
 
 typedef enum EN_VXMLMODULE_TYPE{
@@ -78,7 +59,35 @@ typedef enum EN_VXMLMODULE_TYPE{
 	TYPE_VAR,				///<  <var>					Declare a variable
 	TYPE_VXML,				///<  <vxml>				Top-level element in each VoiceXML document
 	TYPE_NUM
-}TModuleType;
+}EModuleType;
+
+/**************************************************/
+
+typedef map<string,CBaseModule*> VxmlDialogMap;
+
+
+typedef struct ST_PROMPT_ITEM {
+	int _Type;
+	string _Value;
+}TPromptItem;
+
+
+
+
+
+
+typedef list<PromptItem> PromptItemVector
+
+
+struct CEvent
+{
+	int Type;
+	CBaseModule *Scope;
+	CBaseModule *context;
+};
+
+typedef list<struct CEvent*> CEventList;
+
 
 
 

@@ -19,7 +19,7 @@
         _Child.push_back(child);
         return 0;
     }
-    ComponteList CMenuModule::getChild() {
+    TModules CMenuModule::getChild() {
 
         return _Child;
     }
@@ -27,7 +27,7 @@
 
     PromptItemVector CMenuModule::collectPrompts(){
         PromptItemVector prompts;
-        ComponteList::iterator it;
+        TModules::iterator it;
         for ( it=_Child.begin() ; it != _Child.end(); it++ ) {
             if((*it)->Type == TYPE_PROMPT){
                 PromptItem* item = new PromptItem();

@@ -12,7 +12,7 @@ CDocumentModule::~CDocumentModule()
 }
 void CDocumentModule::Accept(VxmlAbsInterpreter *interpreter){
         interpreter->ExecComponte(this);
-        ComponteList::iterator it;
+        TModules::iterator it;
 
 	return;
 }
@@ -20,13 +20,13 @@ int CDocumentModule::add(CBaseModule *child){
 	_Child.push_back(child);
 	return 0;
 }
-ComponteList CDocumentModule::getChild(){
+TModules CDocumentModule::getChild(){
 
 	return _Child;
 }
 
 int CDocumentModule::GetEventList(CEventList& pList){
-	ComponteList::iterator it;
+	TModules::iterator it;
 	for ( it=_Child.begin() ; it != _Child.end(); it++ ) {
 		if((*it)->Type = TYPE_NOINPUT){
 			CEvent *pevent = new CEvent;
@@ -40,7 +40,7 @@ int CDocumentModule::GetEventList(CEventList& pList){
 }
 
 int CDocumentModule::GetDialogMap(VxmlDialogMap& pMap){
-	ComponteList::iterator it;
+	TModules::iterator it;
 	//string = 
 	for ( it=_Child.begin() ; it != _Child.end(); it++ ) {
 		if((*it)->Type = TYPE_MENU){

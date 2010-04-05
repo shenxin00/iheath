@@ -23,7 +23,7 @@ class CDocumentModule: public CBaseModule{
 		virtual ~CDocumentModule();
 		virtual void Accept(VxmlAbsInterpreter *interpreter);
 		virtual int add(CBaseModule *child);
-		virtual ComponteList getChild();
+		virtual TModules getChild();
 		int GetEventList(CEventList& pList);
 		int GetDialogMap(VxmlDialogMap& pMap);
 	/**
@@ -69,7 +69,7 @@ class CMenuModule : public CBaseModule
 		~CMenuModule();
 		virtual void Accept(VxmlAbsInterpreter *interpreter);
 		virtual int add(CBaseModule *child);
-		virtual ComponteList getChild();
+		virtual TModules getChild();
 		PromptItemVector collectPrompts();
 	/**
 	* @ Attributes ..
@@ -122,7 +122,7 @@ class CPromptModule: public CBaseModule{
 		~CPromptModule();
 		virtual void Accept(VxmlAbsInterpreter *interpreter);
 		virtual int add(CBaseModule *child);
-		virtual ComponteList getChild();
+		virtual TModules getChild();
 		string getText();
 	/**
 	* @ Attributes ..
@@ -188,7 +188,7 @@ class VxmlObject : public CBaseModule
 		~VxmlObject();
 
 		virtual int add(CBaseModule* child);
-		virtual ComponteList getChild();
+		virtual TModules getChild();
 		virtual void Accept(VxmlAbsInterpreter* interpreter);
 
 	/**
@@ -254,7 +254,7 @@ public:
         ~CChoiceModule();
         virtual void Accept(VxmlAbsInterpreter *interpreter);
         virtual int add(CBaseModule *child);
-        virtual ComponteList getChild();
+        virtual TModules getChild();
 		
 		
 		string getChoice();
