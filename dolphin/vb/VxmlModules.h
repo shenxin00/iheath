@@ -19,17 +19,39 @@
 */
 class CDocumentModule: public CBaseModule{
 	public:
+		/**
+		* @brief Constructor
+		* @note 
+		*/
 		CDocumentModule();
+		/**
+		* @brief virtual Destructor
+		* @note 
+		*/
 		virtual ~CDocumentModule();
-		virtual void Accept(VxmlAbsInterpreter *interpreter);
-		virtual int add(CBaseModule *child);
-		virtual TModules getChild();
-		int GetEventList(CEventList& pList);
-		int GetDialogMap(VxmlDialogMap& pMap);
+		
+		/**
+		* @brief get the dialog's pointer by dialog id
+		* @note 
+		* @param[in] dialog id
+		* @param[out] dialog's pointer
+		* \exception 
+		* \return error code
+		*/
+		int GetDialogMap(string stDialogId, CBaseModule** ppDialog);
+
+
+	/* member variables */
+	public:
+	
+	private:
+		TDialogs	m_iDialogs;	/**< The documnet's dialogs collection */
+		
+	
+#ifdef _XXX_XXXX_
 	/**
 	* @ Attributes ..
 	*/
-	public:
 		/**< @brief The version of VoiceXML of this document (required).
 		* The current version number is 2.0.
 		*/
@@ -49,6 +71,8 @@ class CDocumentModule: public CBaseModule{
 		string xml_lang;
 		/**< @brief The URI of this document's application root document, if any.*/
 		string application;
+#endif
+		
 };
 
 

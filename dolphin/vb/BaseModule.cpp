@@ -30,6 +30,16 @@ CBaseModule::CBaseModule()
 */
 CBaseModule::~CBaseModule()
 {
+	CBaseModule* child = NULL;
+	/* release all child moudles */
+	for( int index=0; index < m_iChildren.size(); index++ ){
+		/* get the child's pointer */
+		child = m_iChildren.at(index);
+		/* make sure the child's pointer is not zero */
+		assert( child );
+		/* release the child */
+		delete child;
+	}
 
 }
 
@@ -41,9 +51,9 @@ CBaseModule::~CBaseModule()
 * \exception 
 * \return error code
 */
-int CBaseModule::SetChild(CBaseModule *child)
+int CBaseModule::SetChild(CBaseModule *pChild)
 {
-	m_iChildren.push_back(child);
+	m_iChildren.push_back(pChild);
 	
 	return OK_RTN;
 }
@@ -68,10 +78,10 @@ int CBaseModule::GetChildCount(void)
 * \exception 
 * \return error code
 */
-int CBaseModule::GetChild(int index, CBaseModule** child, TModuleType* type)
+int CBaseModule::GetChild(int nIndex, CBaseModule** ppChild, EModuleType* eType)
 {
-	*child = m_iChildren.at(index);
-	*type = child->m_eType;
+	*ppChild = m_iChildren.at(nIndex);
+	*eType = child->m_eType;
 	return OK_RTN;
 }
 
@@ -83,9 +93,9 @@ int CBaseModule::GetChild(int index, CBaseModule** child, TModuleType* type)
 * \exception 
 * \return error code
 */
-int CBaseModule::SetAttribute(string& name, string& value)
+int CBaseModule::SetAttribute(string& stName, string& stValue)
 {
-	m_iAttributes.insert (pair<string,string>(name,value));
+	m_iAttributes.insert(TAttribute(stName,stValue));
 }
 
 /**
@@ -96,10 +106,10 @@ int CBaseModule::SetAttribute(string& name, string& value)
 * \exception 
 * \return error code
 */
-int CBaseModule::GetAttribute(string& name, string& value)
+int CBaseModule::GetAttribute(string& stName, string& stValue)
 {
 
-	TAttributes::iterator iter = stringCounts.find(name);
+	TAttributes::iterator iter = stringCounts.find(stName);
 
 	if( iter == stringCounts.end() )
 	{
@@ -107,7 +117,7 @@ int CBaseModule::GetAttribute(string& name, string& value)
 		return ERR_RTN;
 	}
 	
-	value = iter->second;
+	stValue = iter->second;
 	return OK_RTN;
 }
 
