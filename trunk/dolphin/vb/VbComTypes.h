@@ -2,17 +2,19 @@
 #define _COM_TYPES_H_
 
 
-
-/** vxml modules's attribute list(map)				*/
+/** A vxml modules's attribute						*/
+typedef pair<string,string> TAttribute;
+/** Vxml modules's attribute list(map)				*/
 typedef map<string,string> TAttributes;
-/** vxml modules's attribute list(map)				*/
-typedef pair<string,string> Attribute;
-
-/** linked list of VxmlModules (document sorted)	*/
+/** Linked list of VxmlModules (document sorted)	*/
 typedef vector<CBaseModule*> TModules;
+/** A vxml dialog									*/
+typedef pair<string,string> TDialog;
+/**	The vxml document's dialog collection			*/
+typedef map<string,CBaseModule*> TDialogs;
 
 
-
+/** Vxml module's type								*/
 typedef enum EN_VXMLMODULE_TYPE{
 	//						Element						Purpose
 	TYPE_ASSIGN,			///<  <assign>				Assign a variable a value
@@ -63,7 +65,7 @@ typedef enum EN_VXMLMODULE_TYPE{
 
 /**************************************************/
 
-typedef map<string,CBaseModule*> VxmlDialogMap;
+
 
 
 typedef struct ST_PROMPT_ITEM {
