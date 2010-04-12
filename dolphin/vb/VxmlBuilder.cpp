@@ -164,6 +164,11 @@ void CVxmlBuilder::ToLowerCase(string& str){
 int BuildElement(char* pTagName,TTagAttributes& iAttributes);
 {	
 	CBaseModule		pModule = NULL;
+	TTagAttribute	iAttr;
+	string			stAttrName;
+	string			stAttrType;
+	string			stAttrValue;
+	
 
 	/* get TagID by TagName 		*/
 	string stTagName= string(name);
@@ -264,19 +269,29 @@ int BuildElement(char* pTagName,TTagAttributes& iAttributes);
 	/* */
 	if(pModule == NULL)
 	{
-		return;
+		return ERR_RTN;
 	}
 	
 	/* Set Attributes to the new module	*/
 	for( int i = 0; i < iAttributes.size(); i++)
-	{
+	{		
+		iAttr = iAttributes.at(i);
 		
+		stAttrName = string(iAttr.pName);
+		stAttrType = string(iAttr.pType);
+		stAttrValue = string(iAttr.pValue);
+		
+		// change Attributes to LowerCase 
+		ToLowerCase(stAttrName);
+		
+		pModule->SetAttribute(stAttrName,stAttrValue);
 		
 	}
-
 	
+	return OK_RTN;
 
 }
+
 
 
 /**
@@ -289,36 +304,19 @@ int BuildElement(char* pTagName,TTagAttributes& iAttributes);
 * \exception 
 * \return 
 */
-int CVxmlBuilder::BuildAttribute(char* name,char* value){
-	string attrName= string(name);
-	string attrValue= string(value);
-//cout << "\t" << attrName << " = " << attrValue<< endl;
-	
-	
-}
+int CBaseModule* CVxmlBuilder::BuildDocument(char* value) {
 
 
-/**
-* @brief 
-* @note 
-* 
-* @param[out] 
-* @param[in] 
-* @param[in] 
-* \exception 
-* \return 
-*/
-CBaseModule* CVxmlBuilder::BuildDocument(char* value) {
-	if(__VxmlDoc == NULL){
-		__VxmlDoc = new CDocumentModule();
-		__VxmlDoc->_Value = value;
-		__VxmlDoc->Type = TYPE_DOCUMENT;
+	if(m_iVxmlDoc == NULL){
+		m_iVxmlDoc = new CDocumentModule();
+		m_iVxmlDoc->_Value = value;
+		m_iVxmlDoc->Type = TYPE_DOCUMENT;
 	}else{
 cout <<__FUNCTION__<<"_VxmlDoc is not null"<<endl;
-		return NULL;
+		return ERR_RTN;
 	}
 	
-	return __VxmlDoc ;
+	return OK_RTN ;
 }
 
 
@@ -332,7 +330,7 @@ cout <<__FUNCTION__<<"_VxmlDoc is not null"<<endl;
 * \exception 
 * \return 
 */
-CBaseModule* CVxmlBuilder::BuildMenu(CBaseModule* parent, char* value) {
+int CBaseModule* CVxmlBuilder::BuildMenu(CBaseModule* parent, char* value) {
 	CMenuModule* componte = new CMenuModule();
 	componte->_Value = value;
 	parent->add(componte);

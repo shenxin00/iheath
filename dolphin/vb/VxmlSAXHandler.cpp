@@ -26,8 +26,8 @@ void VxmlSAXHandler::startElement(
 	{
 		//get the Attribute's infomation
 		iAttr.pName			= XMLString::transcode(attrs.getLocalName(i));
-		iAttr.pAttrType		= XMLString::transcode(attrs.getType(i));
-		iAttr.pAttrValue	= XMLString::transcode(attrs.getValue(i));
+		iAttr.pType			= XMLString::transcode(attrs.getType(i));
+		iAttr.pValue		= XMLString::transcode(attrs.getValue(i));
 	
 		// add to attributes's vector in order to send to Vxml Builder
 		iAttributes.push_back(iAttr);

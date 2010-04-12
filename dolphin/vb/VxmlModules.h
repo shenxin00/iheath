@@ -45,8 +45,8 @@ class CDocumentModule: public CBaseModule{
 	public:
 	
 	private:
-		TDialogs	m_iDialogs;	/**< The documnet's dialogs collection */
-		
+		TDialogs	m_iDialogs;	/**< The documnet's dialogs collection	*/
+		string		m_stURI;	/**< The documnet's folder base URI		*/
 	
 #ifdef _XXX_XXXX_
 	/**

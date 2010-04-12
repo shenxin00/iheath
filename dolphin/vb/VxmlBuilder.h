@@ -105,11 +105,12 @@ class CVxmlBuilder {
 		int BuildElement(char* pTagName,TTagAttributes& iAttributes);
 		
 		
-		CBaseModule* BuildDocument(char* value);
-		CBaseModule* BuildMenu(CBaseModule* parent, char* value);
-		CBaseModule* BuildPrompt(CBaseModule* parent, char* value);
-		CBaseModule* BuildChoice(CBaseModule* parent, char* value);
-		CBaseModule* BuildNoinput(CBaseModule* parent, char* value);
+		int BuildDocument(char* value);
+		
+		int BuildMenu(CBaseModule* parent, char* value);
+		int BuildPrompt(CBaseModule* parent, char* value);
+		int BuildChoice(CBaseModule* parent, char* value);
+		int BuildNoinput(CBaseModule* parent, char* value);
 
 		CDocumentModule* getProduct();
 
@@ -142,8 +143,9 @@ class CVxmlBuilder {
 		void ToLowerCase(string& str);
 	/* member variables */
 	private:
-		TVxmlTagIDMap		m_iVxmlTagIDMap;	/**< TagID TagName mapping collection			*/
 		CDocumentModule*	m_iVxmlDoc;			/**< The product vxml documnet's root pointer	*/
+		// process variables 
+		TVxmlTagIDMap		m_iVxmlTagIDMap;	/**< TagID TagName mapping collection			*/
 		CBaseModule*		m_iCurrentModule;	/**< Current module to be building				*/
 };
 
