@@ -18,10 +18,10 @@ XERCES_CPP_NAMESPACE_USE
 
 
 	VxmlParser::VxmlParser() {
-		_Builder = new VxmlBuilder();
+		_Builder = new CVxmlBuilder();
 		_SAXHandler = new VxmlSAXHandler();
 		
-		_SAXHandler->setVxmlBuilder(_Builder);
+		_SAXHandler->setCVxmlBuilder(_Builder);
 	}
 	VxmlParser::~VxmlParser() {
 		delete _Builder;

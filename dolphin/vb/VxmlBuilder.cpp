@@ -1,7 +1,7 @@
 
 
 #include "VxmlBuilder.h"
-#include "CVxmlModules.h"
+#include "VxmlModules.h"
 
 
 /**
@@ -14,7 +14,7 @@
 * \exception 
 * \return 
 */
-VxmlBuilder::VxmlBuilder() {
+CVxmlBuilder::CVxmlBuilder() {
 	/* init document root to NULL */
 	__VxmlDoc = NULL;
 	/* */
@@ -83,7 +83,7 @@ VxmlBuilder::VxmlBuilder() {
 * \exception 
 * \return 
 */
-VxmlBuilder::~VxmlBuilder() {
+CVxmlBuilder::~CVxmlBuilder() {
 	
 }
 
@@ -98,7 +98,7 @@ VxmlBuilder::~VxmlBuilder() {
 * \exception 
 * \return 
 */
-int VxmlBuilder::GetTagID(string& tagName){
+int CVxmlBuilder::GetTagID(string& tagName){
 	
 	/* change tagname to uppercase */
 	ToUpperCase(tagName);
@@ -106,7 +106,7 @@ int VxmlBuilder::GetTagID(string& tagName){
 	/* find the TagID by tagname */
 	VxmlTagIDMap::iterator iter = _VxmlTagIDMap.find(tagName);
 	if( iter != _VxmlTagIDMap.end() ) {
-cout << "TAG_NAME=" << iter->first << "\tTAG_ID=" << iter->second << endl;
+// cout << "TAG_NAME=" << iter->first << "\tTAG_ID=" << iter->second << endl;
 		/* return the tagID */
 		return iter->second;
 	}
@@ -125,15 +125,14 @@ cout << "TAG_NAME=" << iter->first << "\tTAG_ID=" << iter->second << endl;
 * \exception 
 * \return 
 */
-void VxmlBuilder::ToUpperCase(string& str){
+void CVxmlBuilder::ToUpperCase(string& str){
 	
 	int i;
 	for(i= 0;i<str.length();i++){
 		tagName.at(i) = toupper(str.at(i));
-	//	tagName.at(i) = tolower(str.at(i));
 	}
+	return;
 }
-
 
 /**
 * @brief 
@@ -145,10 +144,34 @@ void VxmlBuilder::ToUpperCase(string& str){
 * \exception 
 * \return 
 */
-int VxmlBuilder::BuildElement(char* name){
-	string tagName= string(name);
-	TVxmlTagID tagID = GetTagID(tagName);
-	switch (tagID){
+void CVxmlBuilder::ToLowerCase(string& str){
+	
+	int i;
+	for(i= 0;i<str.length();i++){
+		tagName.at(i) = tolower(str.at(i));
+	}
+	return;
+}
+
+/**
+* @brief Build a module by tag name and attributes
+* @note 
+* @param[in] TagName
+* @param[in] Attributes
+* \exception 
+* \return error code
+*/
+int BuildElement(char* pTagName,TTagAttributes& iAttributes);
+{	
+	CBaseModule		pModule = NULL;
+
+	/* get TagID by TagName 		*/
+	string stTagName= string(name);
+	EVxmlTagID eTagID = GetTagID(stTagName);
+	
+	/* Budild a Module by TagID		*/
+	switch (eTagID)
+	{
 		case TAG_ID_ASSIGN:
 			break;
 		case TAG_ID_AUDIO:
@@ -236,6 +259,22 @@ int VxmlBuilder::BuildElement(char* name){
 		case TAG_ID_VXML:
 			break;
 	}
+	
+	
+	/* */
+	if(pModule == NULL)
+	{
+		return;
+	}
+	
+	/* Set Attributes to the new module	*/
+	for( int i = 0; i < iAttributes.size(); i++)
+	{
+		
+		
+	}
+
+	
 
 }
 
@@ -250,11 +289,12 @@ int VxmlBuilder::BuildElement(char* name){
 * \exception 
 * \return 
 */
-int VxmlBuilder::BuildAttribute(char* name,char* value){
+int CVxmlBuilder::BuildAttribute(char* name,char* value){
 	string attrName= string(name);
 	string attrValue= string(value);
-cout << "\t" << attrName << " = " << attrValue<< endl;
-
+//cout << "\t" << attrName << " = " << attrValue<< endl;
+	
+	
 }
 
 
@@ -268,7 +308,7 @@ cout << "\t" << attrName << " = " << attrValue<< endl;
 * \exception 
 * \return 
 */
-CBaseModule* VxmlBuilder::BuildDocument(char* value) {
+CBaseModule* CVxmlBuilder::BuildDocument(char* value) {
 	if(__VxmlDoc == NULL){
 		__VxmlDoc = new CDocumentModule();
 		__VxmlDoc->_Value = value;
@@ -292,7 +332,7 @@ cout <<__FUNCTION__<<"_VxmlDoc is not null"<<endl;
 * \exception 
 * \return 
 */
-CBaseModule* VxmlBuilder::BuildMenu(CBaseModule* parent, char* value) {
+CBaseModule* CVxmlBuilder::BuildMenu(CBaseModule* parent, char* value) {
 	CMenuModule* componte = new CMenuModule();
 	componte->_Value = value;
 	parent->add(componte);
@@ -312,7 +352,7 @@ CBaseModule* VxmlBuilder::BuildMenu(CBaseModule* parent, char* value) {
 * \exception 
 * \return 
 */
-CBaseModule* VxmlBuilder::BuildPrompt(CBaseModule* parent, char* value) {
+CBaseModule* CVxmlBuilder::BuildPrompt(CBaseModule* parent, char* value) {
 	CPromptModule* componte = new CPromptModule();
 	componte->_Value = value;
 	parent->add(componte);
@@ -331,7 +371,7 @@ CBaseModule* VxmlBuilder::BuildPrompt(CBaseModule* parent, char* value) {
 * \exception 
 * \return 
 */
-CBaseModule* VxmlBuilder::BuildChoice(CBaseModule* :parent, char* value) {
+CBaseModule* CVxmlBuilder::BuildChoice(CBaseModule* :parent, char* value) {
 	CChoiceModule* componte = new CChoiceModule();
 	componte->_Value = value;
 	parent->add(componte);
@@ -352,7 +392,7 @@ CBaseModule* VxmlBuilder::BuildChoice(CBaseModule* :parent, char* value) {
 * \return 
 */
 
-CBaseModule* VxmlBuilder::BuildNoinput(CBaseModule* parent, char* value) {
+CBaseModule* CVxmlBuilder::BuildNoinput(CBaseModule* parent, char* value) {
 	VxmlNoinput* componte = new VxmlNoinput();
 	componte->_Value = node;
 	parent->add(componte);
@@ -371,7 +411,7 @@ CBaseModule* VxmlBuilder::BuildNoinput(CBaseModule* parent, char* value) {
 * \exception 
 * \return 
 */
-CDocumentModule* VxmlBuilder::getProduct() {
+CDocumentModule* CVxmlBuilder::getProduct() {
 	return _VxmlDoc;
 }
 

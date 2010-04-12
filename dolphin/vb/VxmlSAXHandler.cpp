@@ -15,29 +15,40 @@ void VxmlSAXHandler::startElement(
 	const XMLCh* const qname,
 	const Attributes& attrs
 ){
-	//handler Tag
-	char* tagName = XMLString::transcode(localname);
-	_Builder->BuildElement(tagName);
-	XMLString::release(&tagName);
-	
-	//handler tag's Attributes
+	TTagAttributes iAttributes
+	char* pTagName;	
+	TTagAttribute iAttr;
+		
+	//get Tag's name and Attributes
+	pTagName = XMLString::transcode(localname);
 //	cout<<"attrs:"<<endl;
-	for(int i=0;i<attrs.getLength();i++){
-		char* attr_name = XMLString::transcode(attrs.getLocalName(i));
-		char* attr_type = XMLString::transcode(attrs.getType(i));
-		char* attr_value = XMLString::transcode(attrs.getValue(i));
+	for(int i=0;i<attrs.getLength();i++)
+	{
+		//get the Attribute's infomation
+		iAttr.pName			= XMLString::transcode(attrs.getLocalName(i));
+		iAttr.pAttrType		= XMLString::transcode(attrs.getType(i));
+		iAttr.pAttrValue	= XMLString::transcode(attrs.getValue(i));
+	
+		// add to attributes's vector in order to send to Vxml Builder
+		iAttributes.push_back(iAttr);
 		
 //		cout<<"\tLocalName="<<XMLString::transcode(attrs.getLocalName(i));
 //		cout<<"\tType="<<XMLString::transcode(attrs.getType(i));
 //		cout<<"\tVaule="<<XMLString::transcode(attrs.getValue(i))<<endl;
-		
-		_Builder->BuildAttribute(attr_name,attr_value);
-		
-		XMLString::release(&attr_name);
-		XMLString::release(&attr_type);
-		XMLString::release(&attr_value);
 	}
-
+	
+	// build the Module by pass the infomation to Vxml Builder
+	_Builder->BuildElement(pTagName,iAttributes);
+	
+	// release the resource 
+	XMLString::release(&pTagName);
+	for(int i=0;i<iAttributes.size();i++)
+	{
+		iAttr = iAttributes.at(i);
+		XMLString::release(&iAttr.pName);
+		XMLString::release(&iAttr.pAttrType);
+		XMLString::release(&iAttr.pAttrValue);
+	}
 	
 	return;
 }
@@ -95,6 +106,6 @@ void VxmlSAXHandler::error(const SAXParseException& exc){
 #if 0
 #endif
 
-void VxmlSAXHandler::setVxmlBuilder(VxmlBuilder* Builder){
+void VxmlSAXHandler::setCVxmlBuilder(CVxmlBuilder* Builder){
 	_Builder = Builder;
 }
