@@ -1,5 +1,5 @@
-#ifndef VxmlVxmlBUILDER_H
-#define VxmlVxmlBUILDER_H
+#ifndef VxmlCVxmlBuilder_H
+#define VxmlCVxmlBuilder_H
 
 #include "VbCommon.h"
 #include "CVxmlModules.h"
@@ -55,29 +55,56 @@ typedef enum EN_VXML_TAG_ID{
 	TAG_ID_VAR,				///< < <var>				Declare a variable
 	TAG_ID_VXML,			///< < <vxml>				Top-level element in each VoiceXML document
 	TAG_NUM
-}TVxmlTagID;
+}EVxmlTagID;
 
 typedef struct ST_VXML_TAG{
-	int		TagID;
-	string	TagName;
+	EVxmlTagID	eTagID;
+	string		stTagName;
 }TVxmlTag;
 
+
+typedef struct ST_TAG_ATTRIBUTE{
+	char*		pName;
+	char*		pType;
+	char*		pValue;
+}TTagAttribute;
+
 typedef map<string,int> TVxmlTagIDMap;
+typedef vector<TTagAttribute> TTagAttributes;
 
 
 /**
-* @class VxmlBuilder
+* @class CVxmlBuilder
 * @brief 
 *
 * @author Y.Sun <sunyan@hit.edu.cn>
 */
-class VxmlBuilder {
+class CVxmlBuilder {
 
-	/* member variables */
+	/* member function */
 	public:
-		VxmlBuilder();
+		/**
+		* @brief Constructor
+		* @note 
+		*/
+		CVxmlBuilder();
+		/**
+		* @brief virtual Destructor
+		* @note 
+		*/
+		~CVxmlBuilder();
 
-		~VxmlBuilder();
+		/**
+		* @brief Build a module by tag name and attributes
+		* @note 
+		* @param[in] TagName
+		* @param[in] Attributes
+		* \exception 
+		* \return error code
+		*/
+		int BuildElement(char* pTagName,TTagAttributes& iAttributes);
+		
+		
 		CBaseModule* BuildDocument(char* value);
 		CBaseModule* BuildMenu(CBaseModule* parent, char* value);
 		CBaseModule* BuildPrompt(CBaseModule* parent, char* value);
@@ -86,18 +113,38 @@ class VxmlBuilder {
 
 		CDocumentModule* getProduct();
 
-		//interface
-		int BuildElement(char* tagName);
-		int BuildAttribute(char* attrName,char* value);
+
 		
 	private:
-		int GetTagID(string& tagName);
+		/**
+		* @brief Get the enmu TagID by tagName
+		* @note 
+		* @param[in] TagName
+		* \exception 
+		* \return TagID
+		*/
+		int GetTagID(string& stTagName);
+		/**
+		* @brief Convert string to UpperCase
+		* @note 
+		* @param[in out ] string to convert
+		* \exception 
+		* \return void
+		*/
 		void ToUpperCase(string& str);
+		/**
+		* @brief Convert string to LowerCase
+		* @note 
+		* @param[in out ] string to convert
+		* \exception 
+		* \return void
+		*/
+		void ToLowerCase(string& str);
 	/* member variables */
 	private:
-		TVxmlTagIDMap		__VxmlTagIDMap;
-		CDocumentModule*	__VxmlDoc;
-
+		TVxmlTagIDMap		m_iVxmlTagIDMap;	/**< TagID TagName mapping collection			*/
+		CDocumentModule*	m_iVxmlDoc;			/**< The product vxml documnet's root pointer	*/
+		CBaseModule*		m_iCurrentModule;	/**< Current module to be building				*/
 };
 
 

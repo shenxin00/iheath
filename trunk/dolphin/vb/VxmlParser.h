@@ -4,7 +4,7 @@
 
 #include "VbCommon.h"
 #include "CVxmlModules.h"
-#include "VxmlBuilder.h"
+#include "CVxmlBuilder.h"
 #include "VxmlSAXHandler.h"
 
 /**
@@ -16,7 +16,7 @@ class VxmlParser {
 		~VxmlParser();
 		CDocumentModule* DoParser(string& file);
 	private:
-		VxmlBuilder	*		_Builder;
+		CVxmlBuilder	*		_Builder;
 		VxmlSAXHandler*	_SAXHandler;
 };
 

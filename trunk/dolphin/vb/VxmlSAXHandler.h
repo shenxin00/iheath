@@ -5,7 +5,7 @@
 XERCES_CPP_NAMESPACE_USE;
 
 
-#include "VxmlBuilder.h"
+#include "CVxmlBuilder.h"
 
 class VxmlSAXHandler : public DefaultHandler {
 	public:
@@ -33,11 +33,11 @@ class VxmlSAXHandler : public DefaultHandler {
 		void fatalError(const SAXParseException& exc);
 		void error(const SAXParseException& exc);
 
-		void setVxmlBuilder(VxmlBuilder* Builder);
+		void setCVxmlBuilder(CVxmlBuilder* Builder);
 
 	private:
 		/* data */
-		VxmlBuilder*		_Builder;
+		CVxmlBuilder*		m_iBuilder;
 		
 };
 
