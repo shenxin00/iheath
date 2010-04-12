@@ -88,6 +88,8 @@ class CBaseModule
 //		string			m_stValue;		/**< */
 		TAttributes		m_iAttributes;	/**< string based attributes	*/
 		TModules		m_iChildren;	/**< Sub Module's list 			*/
+		CBaseModule	*	m_iParent;		/**< Parent Module 				*/
+
 };
 
 
