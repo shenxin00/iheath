@@ -11,13 +11,32 @@
 	@author sunyan <sunyan@hit.edu.cn>
 */
 class VxmlParser {
+	/* member functions */
 	public:
+		/**
+		* @brief Constructor
+		* @note 
+		*/
 		VxmlParser();
+		/**
+		* @brief virtual Destructor
+		* @note 
+		*/
 		~VxmlParser();
-		CDocumentModule* DoParser(string& file);
+		/**
+		* @brief 
+		* @note 
+		* @param[in]
+		* @param[in]
+		* \exception 
+		* \return error code
+		*/
+		CDocumentModule* DoParser(string& stFileUri);
+		
+	/* member variables */
 	private:
-		CVxmlBuilder	*		_Builder;
-		VxmlSAXHandler*	_SAXHandler;
+		CVxmlBuilder*		m_iBuilder;			/**<		*/
+		VxmlSAXHandler*		m_iSAXHandler;		/**<		*/
 };
 
 

@@ -14,8 +14,7 @@
 */
 CBaseModule::CBaseModule()
 {
-	m_iParent = NULL;
-	
+//	m_iParent = NULL;
 }
 
 

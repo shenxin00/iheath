@@ -76,6 +76,28 @@ class CDocumentModule: public CBaseModule{
 };
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
 * @class CMenuModule
 * @brief A menu is a convenient syntactic shorthand for a form 

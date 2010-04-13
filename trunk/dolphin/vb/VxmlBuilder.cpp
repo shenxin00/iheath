@@ -15,8 +15,10 @@
 * \return 
 */
 CVxmlBuilder::CVxmlBuilder() {
-	/* init document root to NULL */
-	__VxmlDoc = NULL;
+	// init document root to NULL 
+	m_iVxmlDoc			= NULL;
+	m_iCurrentModule	= NULL;
+	
 	/* */
 	TVxmlTag VxmlTagArray[TAG_NUM] = {
 		{TAG_ID_ASSIGN,		"ASSIGN"	},
@@ -67,7 +69,7 @@ CVxmlBuilder::CVxmlBuilder() {
 	
 	/* init Vxml tags map */
 	for(i= 0;i<TAG_NUM;i++){
-		__VxmlTagIDMap.insert(pair<string,int>(VxmlTagArray[i].TagName,VxmlTagArray[i].TagID));
+		m_iVxmlTagIDMap.insert(TVxmlTagID(VxmlTagArray[i].stTagName,VxmlTagArray[i].eTagID));
 	}
 	
 	/* */
@@ -98,8 +100,9 @@ CVxmlBuilder::~CVxmlBuilder() {
 * \exception 
 * \return 
 */
-int CVxmlBuilder::GetTagID(string& tagName){
-	
+int CVxmlBuilder::GetTagID(string& tagName)
+{
+
 	/* change tagname to uppercase */
 	ToUpperCase(tagName);
 	
@@ -125,7 +128,8 @@ int CVxmlBuilder::GetTagID(string& tagName){
 * \exception 
 * \return 
 */
-void CVxmlBuilder::ToUpperCase(string& str){
+void CVxmlBuilder::ToUpperCase(string& str)
+{
 	
 	int i;
 	for(i= 0;i<str.length();i++){
@@ -144,7 +148,8 @@ void CVxmlBuilder::ToUpperCase(string& str){
 * \exception 
 * \return 
 */
-void CVxmlBuilder::ToLowerCase(string& str){
+void CVxmlBuilder::ToLowerCase(string& str)
+{
 	
 	int i;
 	for(i= 0;i<str.length();i++){
@@ -161,118 +166,201 @@ void CVxmlBuilder::ToLowerCase(string& str){
 * \exception 
 * \return error code
 */
-int BuildElement(char* pTagName,TTagAttributes& iAttributes);
-{	
+int CVxmlBuilder::StartModule(char* pTagName,TTagAttributes& iAttributes);
+{
 	CBaseModule		pModule = NULL;
+	EModuleType		eType;
 	TTagAttribute	iAttr;
 	string			stAttrName;
 	string			stAttrType;
 	string			stAttrValue;
-	
 
-	/* get TagID by TagName 		*/
+
+	// get TagID by TagName
 	string stTagName= string(name);
 	EVxmlTagID eTagID = GetTagID(stTagName);
 	
-	/* Budild a Module by TagID		*/
-	switch (eTagID)
-	{
-		case TAG_ID_ASSIGN:
-			break;
-		case TAG_ID_AUDIO:
-			break;
-		case TAG_ID_BLOCK:
-			break;
-		case TAG_ID_CATCH:
-			break;
-		case TAG_ID_CHOICE:
-			break;
-		case TAG_ID_CLEAR:
-			break;
-		case TAG_ID_DISCONNECT:
-			break;
-		case TAG_ID_ELSE:
-			break;
-		case TAG_ID_ELSEIF:
-			break;
-		case TAG_ID_ENUMERATE:
-			break;
-		case TAG_ID_ERROR:
-			break;
-		case TAG_ID_EXIT:
-			break;
-		case TAG_ID_FIELD:
-			break;
-		case TAG_ID_FILLED:
-			break;
-		case TAG_ID_FORM:
-			break;
-		case TAG_ID_GOTO:
-			break;
-		case TAG_ID_GRAMMAR:
-			break;
-		case TAG_ID_HELP:
-			break;
-		case TAG_ID_IF:
-			break;
-		case TAG_ID_INITIAL:
-			break;
-		case TAG_ID_LINK:
-			break;
-		case TAG_ID_LOG:
-			break;
-		case TAG_ID_MENU:
-			break;
-		case TAG_ID_META:
-			break;
-		case TAG_ID_METADATA:
-			break;
-		case TAG_ID_NOINPUT:
-			break;
-		case TAG_ID_NOMATCH:
-			break;
-		case TAG_ID_OBJECT:
-			break;
-		case TAG_ID_OPTION:
-			break;
-		case TAG_ID_PARAM:
-			break;
-		case TAG_ID_PROMPT:
-			break;
-		case TAG_ID_PROPERTY:
-			break;
-		case TAG_ID_RECORD:
-			break;
-		case TAG_ID_REPROMPT:
-			break;
-		case TAG_ID_RETURN:
-			break;
-		case TAG_ID_SCRIPT:
-			break;
-		case TAG_ID_SUBDIALOG:
-			break;
-		case TAG_ID_SUBMIT:
-			break;
-		case TAG_ID_THROW:
-			break;
-		case TAG_ID_TRANSFER:
-			break;
-		case TAG_ID_VALUE:
-			break;
-		case TAG_ID_VAR:
-			break;
-		case TAG_ID_VXML:
-			break;
-	}
-	
-	
-	/* */
+	// build a new Module 
+	pModule = new CBaseModule();
+	// on error retunr 
 	if(pModule == NULL)
 	{
 		return ERR_RTN;
 	}
+		
+	// set Module TagID	
+	switch (eTagID)
+	{
+		case TAG_ID_ASSIGN:
+			eType = TYPE_ASSIGN;
+			break;
+		case TAG_ID_AUDIO:
+			eType = TYPE_AUDIO;
+			break;
+		case TAG_ID_BLOCK:
+			eType = TYPE_BLOCK;
+			break;
+		case TAG_ID_CATCH:
+			eType = TYPE_CATCH;
+			break;
+		case TAG_ID_CHOICE:
+			eType = TYPE_CHOICE;
+			break;
+		case TAG_ID_CLEAR:
+			eType = TYPE_CLEAR;
+			break;
+		case TAG_ID_DISCONNECT:
+			eType = TYPE_DISCONNECT;
+			break;
+		case TAG_ID_ELSE:
+			eType = TYPE_ELSE;
+			break;
+		case TAG_ID_ELSEIF:
+			eType = TYPE_ELSEIF;
+			break;
+		case TAG_ID_ENUMERATE:
+			eType = TYPE_ENUMERATE;
+			break;
+		case TAG_ID_ERROR:
+			//eType = TYPE_ERROR;
+
+			// act as Cactch with attribute event=error
+			eType = TYPE_CATCH;
+			stAttrName = string("event");
+			//stAttrType = string(iAttr.pType);
+			stAttrValue = string("error");
+			
+			pModule->SetAttribute(stAttrName,stAttrValue);
+			
+			break;
+		case TAG_ID_EXIT:
+			eType = TYPE_EXIT;
+			break;
+		case TAG_ID_FIELD:
+			eType = TYPE_FIELD;
+			break;
+		case TAG_ID_FILLED:
+			eType = TYPE_FILLED;
+			break;
+		case TAG_ID_FORM:
+			eType = TYPE_FORM;
+			break;
+		case TAG_ID_GOTO:
+			eType = TYPE_GOTO;
+			break;
+		case TAG_ID_GRAMMAR:
+			eType = TYPE_GRAMMAR;
+			break;
+		case TAG_ID_HELP:
+			//eType = TYPE_HELP;
+
+			// act as Cactch with attribute event=error
+			eType = TYPE_CATCH;
+			stAttrName = string("event");
+			//stAttrType = string(iAttr.pType);
+			stAttrValue = string("help");
+			
+			pModule->SetAttribute(stAttrName,stAttrValue);
+
+			break;
+		case TAG_ID_IF:
+			eType = TYPE_IF;
+			break;
+		case TAG_ID_INITIAL:
+			eType = TYPE_INITIAL;
+			break;
+		case TAG_ID_LINK:
+			eType = TYPE_LINK;
+			break;
+		case TAG_ID_LOG:
+			eType = TYPE_LOG;
+			break;
+		case TAG_ID_MENU:
+			eType = TYPE_MENU;
+			break;
+		case TAG_ID_META:
+			eType = TYPE_META;
+			break;
+		case TAG_ID_METADATA:
+			eType = TYPE_METADATA;
+			break;
+		case TAG_ID_NOINPUT:
+			//eType = TYPE_NOINPUT;
+
+			// act as Cactch with attribute event=error
+			eType = TYPE_CATCH;
+			stAttrName = string("event");
+			//stAttrType = string(iAttr.pType);
+			stAttrValue = string("noinput");
+			
+			pModule->SetAttribute(stAttrName,stAttrValue);
+
+			break;
+		case TAG_ID_NOMATCH:
+			//eType = TYPE_NOMATCH;
+
+			// act as Cactch with attribute event=error
+			eType = TYPE_CATCH;
+			stAttrName = string("event");
+			//stAttrType = string(iAttr.pType);
+			stAttrValue = string("nomatch");
+			
+			pModule->SetAttribute(stAttrName,stAttrValue);
+
+			break;
+		case TAG_ID_OBJECT:
+			eType = TYPE_OBJECT;
+			break;
+		case TAG_ID_OPTION:
+			eType = TYPE_OPTION;
+			break;
+		case TAG_ID_PARAM:
+			eType = TYPE_PARAM;
+			break;
+		case TAG_ID_PROMPT:
+			eType = TYPE_PROMPT;
+			break;
+		case TAG_ID_PROPERTY:
+			eType = TYPE_PROPERTY;
+			break;
+		case TAG_ID_RECORD:
+			eType = TYPE_RECORD;
+			break;
+		case TAG_ID_REPROMPT:
+			eType = TYPE_REPROMPT;
+			break;
+		case TAG_ID_RETURN:
+			eType = TYPE_RETURN;
+			break;
+		case TAG_ID_SCRIPT:
+			eType = TYPE_SCRIPT;
+			break;
+		case TAG_ID_SUBDIALOG:
+			eType = TYPE_SUBDIALOG;
+			break;
+		case TAG_ID_SUBMIT:
+			eType = TYPE_SUBMIT;
+			break;
+		case TAG_ID_THROW:
+			eType = TYPE_THROW;
+			break;
+		case TAG_ID_TRANSFER:
+			eType = TYPE_TRANSFER;
+			break;
+		case TAG_ID_VALUE:
+			eType = TYPE_VALUE;
+			break;
+		case TAG_ID_VAR:
+			eType = TYPE_VAR;
+			break;
+		case TAG_ID_VXML:
+			eType = TYPE_VXML;
+			break;
+		default:
+	}
+	pModule->m_eType = eType;
 	
-	/* Set Attributes to the new module	*/
+	// Set Attributes to the new module
 	for( int i = 0; i < iAttributes.size(); i++)
 	{		
 		iAttr = iAttributes.at(i);
@@ -285,15 +373,19 @@ int BuildElement(char* pTagName,TTagAttributes& iAttributes);
 		ToLowerCase(stAttrName);
 		
 		pModule->SetAttribute(stAttrName,stAttrValue);
-		
 	}
 	
+	// add the module to the current module as child
+	m_iCurrentModule->SetChild(pModule);
+	pModule->m_iParent = m_iCurrentModule;
+
+	// and set the modules as the current module 
+	m_iCurrentModule = pModule;
+
 	return OK_RTN;
 
 }
 
-
-
 /**
 * @brief 
 * @note 
@@ -304,21 +396,43 @@ int BuildElement(char* pTagName,TTagAttributes& iAttributes);
 * \exception 
 * \return 
 */
-int CBaseModule* CVxmlBuilder::BuildDocument(char* value) {
-
-
-	if(m_iVxmlDoc == NULL){
-		m_iVxmlDoc = new CDocumentModule();
-		m_iVxmlDoc->_Value = value;
-		m_iVxmlDoc->Type = TYPE_DOCUMENT;
-	}else{
-cout <<__FUNCTION__<<"_VxmlDoc is not null"<<endl;
-		return ERR_RTN;
-	}
+int CVxmlBuilder::EndModule(char* pTagName)
+{
+	m_iCurrentModule = m_iCurrentModule->m_iParent;
 	
 	return OK_RTN ;
 }
 
+/**
+* @brief 
+* @note 
+* 
+* @param[out] 
+* @param[in] 
+* @param[in] 
+* \exception 
+* \return 
+*/
+int CVxmlBuilder::BuildText(char* pValue,int nLength)
+{
+	// build a new Module 
+	pModule = new CBaseModule();
+	// on error return 
+	if(pModule == NULL)
+	{
+		return ERR_RTN;
+	}
+	
+	//set Text Element's content 
+	pModule->m_eType	= TYPE_TEXT;
+	pModule->m_stText	= string(pValue);
+	
+	// add the module to the current module as child 
+	m_iCurrentModule->SetChild(pModule);
+	pModule->m_iParent = m_iCurrentModule;
+	
+	return OK_RTN ;
+}
 
 /**
 * @brief 
@@ -330,15 +444,29 @@ cout <<__FUNCTION__<<"_VxmlDoc is not null"<<endl;
 * \exception 
 * \return 
 */
-int CBaseModule* CVxmlBuilder::BuildMenu(CBaseModule* parent, char* value) {
-	CMenuModule* componte = new CMenuModule();
-	componte->_Value = value;
-	parent->add(componte);
-	componte->Type = TYPE_MENU;
-	return componte;
+int CVxmlBuilder::BuildDocument(char* pValue)
+{
+	//on m_iVxmlDoc is not null return error
+	if(m_iVxmlDoc == NULL){
+		m_iVxmlDoc = new CDocumentModule();
+	}else{
+		return ERR_RTN;
+	}
+	
+	// on error return 
+	if(pModule == NULL)
+	{
+		return ERR_RTN;
+	}
+	
+	m_iVxmlDoc->m_iParent	= NULL;
+	m_iVxmlDoc->m_stURI		= string(pValue);
+	m_iVxmlDoc->m_eType		= TYPE_VXML;
 
+	m_iCurrentModule		= (CBaseModule*)m_iVxmlDoc;
+	
+	return OK_RTN ;
 }
-
 
 /**
 * @brief 
@@ -350,66 +478,31 @@ int CBaseModule* CVxmlBuilder::BuildMenu(CBaseModule* parent, char* value) {
 * \exception 
 * \return 
 */
-CBaseModule* CVxmlBuilder::BuildPrompt(CBaseModule* parent, char* value) {
-	CPromptModule* componte = new CPromptModule();
-	componte->_Value = value;
-	parent->add(componte);
-	componte->Type = TYPE_PROMPT;
-	return componte;
+CDocumentModule* CVxmlBuilder::GetProduct() {
+	return m_iVxmlDoc;
 }
-
 
 /**
 * @brief 
 * @note 
-* 
-* @param[out] 
-* @param[in] 
-* @param[in] 
+* @param[in ]
 * \exception 
-* \return 
+* \return void
 */
-CBaseModule* CVxmlBuilder::BuildChoice(CBaseModule* :parent, char* value) {
-	CChoiceModule* componte = new CChoiceModule();
-	componte->_Value = value;
-	parent->add(componte);
-	componte->Type = TYPE_CHOICE;
-	return componte;
+void CVxmlBuilder::SetErrorCode(int code)
+{
+	m_nErrorCode = code;
 }
-
-
-#if 0
 /**
 * @brief 
 * @note 
-* 
-* @param[out] 
-* @param[in] 
-* @param[in] 
+* @param[in ]
 * \exception 
-* \return 
+* \return void
 */
-
-CBaseModule* CVxmlBuilder::BuildNoinput(CBaseModule* parent, char* value) {
-	VxmlNoinput* componte = new VxmlNoinput();
-	componte->_Value = node;
-	parent->add(componte);
-	componte->Type = TYPE_NOINPUT;
-	return componte;
+int CVxmlBuilder::GetErrorCode(void)
+{
+	return m_nErrorCode;
 }
-#endif
 
-/**
-* @brief 
-* @note 
-* 
-* @param[out] 
-* @param[in] 
-* @param[in] 
-* \exception 
-* \return 
-*/
-CDocumentModule* CVxmlBuilder::getProduct() {
-	return _VxmlDoc;
-}
 
