@@ -52,13 +52,23 @@ printf("[recv]%d\n",recvParam.action);
 // 
 ///////////////////////////////////////////////////////////////////
 
-#include "VxmlParser.h"
+#include "CVxmlParser.h"
 
-int main (int argc, char* args[]) {
-	VxmlParser parser;
+int main (int argc, char* args[])
+{
+	CVxmlParser			iParser;
+	CVxmlInterpreter	iInterpreter;
+	CDocumentModule*	pDoc;
 	
-	string file ="gmcc_special.vxml";
-	parser.DoParser(file);
+	string stFile ="gmcc_special.vxml";
+	pDoc = iParser.DoParser(stFile);
+	
+	if(pDoc == NULL){
+		return ERR_RTN;
+	}
+	
+	iInterpreter.Excute(pDoc);
+	
 	
 	return 0;
 }

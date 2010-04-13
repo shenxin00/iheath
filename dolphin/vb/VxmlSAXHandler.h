@@ -1,5 +1,5 @@
-#ifndef _VXMLSAXHANDLER_H_
-#define _VXMLSAXHANDLER_H_
+#ifndef _CVxmlSAXHandler_H_
+#define _CVxmlSAXHandler_H_
 
 #include <xercesc/sax2/DefaultHandler.hpp>
 XERCES_CPP_NAMESPACE_USE;
@@ -7,7 +7,7 @@ XERCES_CPP_NAMESPACE_USE;
 
 #include "CVxmlBuilder.h"
 
-class VxmlSAXHandler : public DefaultHandler {
+class CVxmlSAXHandler : public DefaultHandler {
 	public:
 		
 		void startDocument();
@@ -41,4 +41,4 @@ class VxmlSAXHandler : public DefaultHandler {
 		
 };
 
-#endif //_VXMLSAXHANDLER_H_
+#endif //_CVxmlSAXHandler_H_

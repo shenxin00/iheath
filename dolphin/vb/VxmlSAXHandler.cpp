@@ -1,15 +1,15 @@
 
 #include "VbCommon.h"
-#include "VxmlSAXHandler.h"
+#include "CVxmlSAXHandler.h"
 #include <xercesc/sax2/Attributes.hpp>
 
 
-void VxmlSAXHandler::startDocument(){
+void CVxmlSAXHandler::startDocument(){
 	_Builder->BuildDocument("document_name");
 }
 
 
-void VxmlSAXHandler::startElement(
+void CVxmlSAXHandler::startElement(
 	const XMLCh* const uri,
 	const XMLCh* const localname,
 	const XMLCh* const qname,
@@ -52,7 +52,7 @@ void VxmlSAXHandler::startElement(
 	
 	return;
 }
-void VxmlSAXHandler::fatalError(const SAXParseException& exc){
+void CVxmlSAXHandler::fatalError(const SAXParseException& exc){
 #if 0
 	cout<<__FUNCTION__<<endl;
 #endif
@@ -64,7 +64,7 @@ void VxmlSAXHandler::fatalError(const SAXParseException& exc){
 	return;
 }
 
-void VxmlSAXHandler::endElement(
+void CVxmlSAXHandler::endElement(
 	const XMLCh* const uri,
 	const XMLCh* const localname,
 	const XMLCh* const qname
@@ -86,7 +86,7 @@ void VxmlSAXHandler::endElement(
 
 
 
-void VxmlSAXHandler::characters(
+void CVxmlSAXHandler::characters(
 	const XMLCh* const chars,
 	const unsigned int length
 ){
@@ -101,7 +101,7 @@ void VxmlSAXHandler::characters(
 #endif
 	return;
 }
-void VxmlSAXHandler::error(const SAXParseException& exc){
+void CVxmlSAXHandler::error(const SAXParseException& exc){
 //	cout<<__FUNCTION__<<endl;
 #if 0
 	char* message = XMLString::transcode(exc.getMessage());
@@ -116,6 +116,6 @@ void VxmlSAXHandler::error(const SAXParseException& exc){
 #if 0
 #endif
 
-void VxmlSAXHandler::SetBuilder(CVxmlBuilder* Builder){
+void CVxmlSAXHandler::SetBuilder(CVxmlBuilder* Builder){
 	m_iBuilder = Builder;
 }

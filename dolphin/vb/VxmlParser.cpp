@@ -9,8 +9,8 @@
 #include <iostream.h>
 #endif
 
-#include "VxmlParser.h"
-#include "VxmlSAXHandler.h"
+#include "CVxmlParser.h"
+#include "CVxmlSAXHandler.h"
 
 
 XERCES_CPP_NAMESPACE_USE
@@ -20,10 +20,10 @@ XERCES_CPP_NAMESPACE_USE
 * @brief Constructor
 * @note 
 */
-VxmlParser::VxmlParser()
+CVxmlParser::CVxmlParser()
 {
 	m_iBuilder = new CVxmlBuilder();
-	m_iSAXHandler = new VxmlSAXHandler();
+	m_iSAXHandler = new CVxmlSAXHandler();
 	
 	m_iSAXHandler->SetBuilder(m_iBuilder);
 }
@@ -31,7 +31,7 @@ VxmlParser::VxmlParser()
 * @brief virtual Destructor
 * @note 
 */
-VxmlParser::~VxmlParser()
+CVxmlParser::~CVxmlParser()
 {
 	delete m_iBuilder;
 	delete m_iSAXHandler;
@@ -45,7 +45,7 @@ VxmlParser::~VxmlParser()
 * \return error code
 */
 
-CDocumentModule* VxmlParser::DoParser(string& stFileUri)
+CDocumentModule* CVxmlParser::DoParser(string& stFileUri)
 {
 	int nErrorCode;
 	

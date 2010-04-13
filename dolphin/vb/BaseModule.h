@@ -37,7 +37,7 @@ class CBaseModule
 		* \exception 
 		* \return error code
 		*/
-		int SetChild(CBaseModule *pChild);
+		void SetChild(CBaseModule *pChild);
 
 		/**
 		* @brief calculate the sub modules counts
@@ -56,8 +56,8 @@ class CBaseModule
 		* \exception 
 		* \return error code
 		*/
-		int GetChild(int nIndex, CBaseModule** ppChild, EModuleType* eType);
-
+//		int GetChild(int nIndex, CBaseModule** ppChild, EModuleType* eType);
+		CBaseModule* GetChild(int nIndex)
 		/**
 		* @brief add a attribute to current module.
 		* @note 
@@ -76,7 +76,7 @@ class CBaseModule
 		* \exception 
 		* \return error code
 		*/
-		int GetAttribute(string& stName, string& stValue);
+		int GetAttribute(const string& stName, string& stValue);
 		
 
 		virtual void Accept(VxmlAbsInterpreter *interpreter);
