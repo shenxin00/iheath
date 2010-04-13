@@ -1,5 +1,5 @@
-#ifndef VxmlCVxmlBuilder_H
-#define VxmlCVxmlBuilder_H
+#ifndef _CVXMLBUILDER_H_
+#define _CVXMLBUILDER_H_
 
 #include "VbCommon.h"
 #include "CVxmlModules.h"
@@ -194,6 +194,6 @@ class CVxmlBuilder {
 };
 
 
-#endif
+#endif //_CVXMLBUILDER_H_
 
 

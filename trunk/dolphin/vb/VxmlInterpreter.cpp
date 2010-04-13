@@ -1,26 +1,108 @@
 
 
-#include "VxmlInterpreter.h"
+#include "CVxmlInterpreter.h"
 
 #include <iostream>
 #include <string>
 
 #include "CVxmlModules.h"
+/**
+* @brief Constructor
+* @note 
+*/
+CVxmlInterpreter::CVxmlInterpreter()
+{
+	
+}
+
+/**
+* @brief Destructor
+* @note
+*/
+CVxmlInterpreter::~CVxmlInterpreter()
+{
+	
+}
+
+/**
+* @brief 
+* @note 
+* @param[in]
+* \exception 
+* \return error code
+*/
+void CVxmlInterpreter::Execute(CDocumentModule* pDoc)
+{
+	int				nChildrenCount;
+	CBaseModule		pModule;
+	string			stEvent;
+	
+	if(pDoc == NULL){
+		return;
+	}
+	
+	nChildrenCount = pDoc->GetChildCount()
+	// pre function
+	for(int nPos= 0;nPos < nChildrenCount;nPos++
+	{
+		pModule = pDoc->GetChild(nIndex);
+		//treat <catch> 
+		if(pModule->m_eType == TYPE_CATCH)
+		{
+			if(pModule->GetAttribute(sting("event"),stEvent) == OK_RTN)
+			{
+				m_iEventHandler.AddEventAction(stEvent,pModule);
+			}
+			
+		}
+	}
+
+		
+	//main function
+	
+}
+/**
+* @brief 
+* @note 
+* @param[in]
+* \exception 
+* \return error code
+*/
+void CVxmlInterpreter::Execute(CDocumentModule* pDoc, string& stDialog)
+{
+	
+}
+/**
+* @brief 
+* @note 
+* @param[in]
+* \exception 
+* \return error code
+*/
+void CVxmlInterpreter::Execute(string& stDialog)
+{
+	
+}
+/**
+* @brief 
+* @note 
+* @param[in]
+* \exception 
+* \return error code
+*/
+void CVxmlInterpreter::ExecuteModule( CBaseModule* pModule)
+{
+
+}
+
 
 #include "VxmlPlatForm.h"
 
 
 
 
-	VxmlInterpreter::VxmlInterpreter()
-	{
-	}
 
-
-	VxmlInterpreter::~VxmlInterpreter()
-	{
-	}
-	void VxmlInterpreter::ExecComponte ( CDocumentModule* doc )
+	void CVxmlInterpreter::ExecComponte ( CDocumentModule* doc )
 	{
 		cout << "CDocumentModule:" << endl;
 		TModules children;
@@ -53,7 +135,7 @@
 
 		return;
 	}
-	TModules::iterator VxmlInterpreter::getNext(CBaseModule* nextDialog,TModules children){
+	TModules::iterator CVxmlInterpreter::getNext(CBaseModule* nextDialog,TModules children){
 			TModules::iterator it;
 			for ( it=children.begin() ; it != children.end(); it++ ) {
 				if((*it)==nextDialog){
@@ -62,7 +144,7 @@
 			}
 			return it;
 	}
-	CBaseModule* VxmlInterpreter::CheckNext(string& next){
+	CBaseModule* CVxmlInterpreter::CheckNext(string& next){
 		VxmlDialogMap::iterator it;
 		for ( it=_DialogMap.begin() ; it != _DialogMap.end(); it++ ) {
 			if(next.compare((*it).first)){
@@ -72,7 +154,7 @@
 		return NULL;
 	}
 
-	void VxmlInterpreter::ExecComponte ( CMenuModule* menu )
+	void CVxmlInterpreter::ExecComponte ( CMenuModule* menu )
 	{
 		TModules children;
 		PromptItemVector::iterator it;
@@ -100,14 +182,14 @@
 
 		return;
 	}
-	void VxmlInterpreter::ExecComponte ( CPromptModule* prompt )
+	void CVxmlInterpreter::ExecComponte ( CPromptModule* prompt )
 	{
 		cout << "CPromptModule:" << endl;
 		cout << prompt->getText() << endl;
 		return;
 
 	}
-	void VxmlInterpreter::ExecComponte ( CChoiceModule* choice )
+	void CVxmlInterpreter::ExecComponte ( CChoiceModule* choice )
 	{
 		cout << "CChoiceModule:" << endl;
 		string key =choice->getChoice();

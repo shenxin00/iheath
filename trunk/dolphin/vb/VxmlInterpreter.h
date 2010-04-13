@@ -1,5 +1,5 @@
-#ifndef VxmlVxmlINTERPRETER_H
-#define VxmlVxmlINTERPRETER_H
+#ifndef VxmlCVxmlInterpreter_H
+#define VxmlCVxmlInterpreter_H
 
 #include "VxmlAbsInterpreter.h"
 #include "CVxmlModules.h"
@@ -10,7 +10,7 @@
 /**
 	@author sunyan <sunyan@hit.edu.cn>
 */
-class VxmlInterpreter
+class CVxmlInterpreter
 {
 	/* member functions */
 	public:
@@ -18,12 +18,12 @@ class VxmlInterpreter
 		* @brief Constructor
 		* @note 
 		*/
-		VxmlInterpreter();
+		CVxmlInterpreter();
 		/**
 		* @brief Destructor
 		* @note
 		*/
-		~VxmlInterpreter();
+		~CVxmlInterpreter();
 		/**
 		* @brief 
 		* @note 
@@ -62,13 +62,12 @@ class VxmlInterpreter
 	/* member variables */
 	private:
 		//Execute content 
-		TEventActions		m_iEventActions;	/**<		*/
+		CEventHandler		m_iEventHandler;	/**<		*/
 		/**
 		!Todo
 			input events are monitor by monitor thread 
 			and call interpreter's event handler function to handler the event
 		*/
-		
 		CDocumentModule*	m_iCurrentDoc;		/**<		*/
 		
 		

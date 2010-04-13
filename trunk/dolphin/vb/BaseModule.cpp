@@ -51,7 +51,7 @@ CBaseModule::~CBaseModule()
 * \exception 
 * \return error code
 */
-int CBaseModule::SetChild(CBaseModule *pChild)
+void CBaseModule::SetChild(CBaseModule *pChild)
 {
 	m_iChildren.push_back(pChild);
 	
@@ -78,11 +78,11 @@ int CBaseModule::GetChildCount(void)
 * \exception 
 * \return error code
 */
-int CBaseModule::GetChild(int nIndex, CBaseModule** ppChild, EModuleType* eType)
+CBaseModule* CBaseModule::GetChild(int nIndex)
 {
-	*ppChild = m_iChildren.at(nIndex);
-	*eType = child->m_eType;
-	return OK_RTN;
+	CBaseModule* pChild;
+	pChild = m_iChildren.at(nIndex);
+	return pChild;
 }
 
 /**
@@ -106,7 +106,7 @@ int CBaseModule::SetAttribute(string& stName, string& stValue)
 * \exception 
 * \return error code
 */
-int CBaseModule::GetAttribute(string& stName, string& stValue)
+int CBaseModule::GetAttribute(const string& stName, string& stValue)
 {
 
 	TAttributes::iterator iter = stringCounts.find(stName);

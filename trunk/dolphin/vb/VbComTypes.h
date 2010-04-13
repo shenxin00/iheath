@@ -70,10 +70,6 @@ typedef enum EN_VXMLMODULE_TYPE{
 
 
 
-typedef stack<CBaseModule*> TActions;
-typedef pair<string,TActions> TEventAction;
-typedef map<string,TActions> TEventActions;
-
 
 
 

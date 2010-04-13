@@ -1,28 +1,28 @@
-#ifndef VxmlVxmlPARSER_H
-#define VxmlVxmlPARSER_H
+#ifndef VxmlCVxmlParser_H
+#define VxmlCVxmlParser_H
 
 
 #include "VbCommon.h"
 #include "CVxmlModules.h"
 #include "CVxmlBuilder.h"
-#include "VxmlSAXHandler.h"
+#include "CVxmlSAXHandler.h"
 
 /**
 	@author sunyan <sunyan@hit.edu.cn>
 */
-class VxmlParser {
+class CVxmlParser {
 	/* member functions */
 	public:
 		/**
 		* @brief Constructor
 		* @note 
 		*/
-		VxmlParser();
+		CVxmlParser();
 		/**
 		* @brief virtual Destructor
 		* @note 
 		*/
-		~VxmlParser();
+		~CVxmlParser();
 		/**
 		* @brief 
 		* @note 
@@ -36,7 +36,7 @@ class VxmlParser {
 	/* member variables */
 	private:
 		CVxmlBuilder*		m_iBuilder;			/**<		*/
-		VxmlSAXHandler*		m_iSAXHandler;		/**<		*/
+		CVxmlSAXHandler*		m_iSAXHandler;		/**<		*/
 };
 
 
