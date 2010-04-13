@@ -38,7 +38,7 @@ void VxmlSAXHandler::startElement(
 	}
 	
 	// build the Module by pass the infomation to Vxml Builder
-	_Builder->BuildElement(pTagName,iAttributes);
+	m_iBuilder->StartModule(pTagName,iAttributes);
 	
 	// release the resource 
 	XMLString::release(&pTagName);
@@ -69,6 +69,12 @@ void VxmlSAXHandler::endElement(
 	const XMLCh* const localname,
 	const XMLCh* const qname
 ){
+	char* pTagName;
+
+	pTagName = XMLString::transcode(localname);
+	m_iBuilder->EndModule(pTagName);
+	XMLString::release(&pTagName);
+
 #if 0
 	cout<<__FUNCTION__<<endl;
 	cout<<"uri="<<uri<<endl;
@@ -84,6 +90,10 @@ void VxmlSAXHandler::characters(
 	const XMLCh* const chars,
 	const unsigned int length
 ){
+	char* pValue;	
+	pValue = XMLString::transcode(chars);
+	m_iBuilder->BuildText(pValue,chars);
+	XMLString::release(&pValue);
 #if 0
 	cout<<__FUNCTION__<<endl;
 	cout<<"chars="<<chars<<endl;
@@ -106,6 +116,6 @@ void VxmlSAXHandler::error(const SAXParseException& exc){
 #if 0
 #endif
 
-void VxmlSAXHandler::setCVxmlBuilder(CVxmlBuilder* Builder){
-	_Builder = Builder;
+void VxmlSAXHandler::SetBuilder(CVxmlBuilder* Builder){
+	m_iBuilder = Builder;
 }

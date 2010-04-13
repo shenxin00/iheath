@@ -1,4 +1,3 @@
-#include "CVxmlModules.h"
 
 CEvent::CEvent(void)
 {

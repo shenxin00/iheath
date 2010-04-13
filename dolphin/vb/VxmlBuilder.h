@@ -69,7 +69,9 @@ typedef struct ST_TAG_ATTRIBUTE{
 	char*		pValue;
 }TTagAttribute;
 
-typedef map<string,int> TVxmlTagIDMap;
+typedef map<string,EVxmlTagID> TVxmlTagIDMap;
+typedef pair<string,EVxmlTagID> TVxmlTagID;
+
 typedef vector<TTagAttribute> TTagAttributes;
 
 
@@ -93,7 +95,15 @@ class CVxmlBuilder {
 		* @note 
 		*/
 		~CVxmlBuilder();
-
+		/**
+		* @brief 
+		* @note 
+		* @param[in]
+		* @param[in]
+		* \exception 
+		* \return error code
+		*/
+		int BuildDocument(char* value);
 		/**
 		* @brief Build a module by tag name and attributes
 		* @note 
@@ -102,20 +112,35 @@ class CVxmlBuilder {
 		* \exception 
 		* \return error code
 		*/
-		int BuildElement(char* pTagName,TTagAttributes& iAttributes);
+		int StartElement(char* pTagName,TTagAttributes& iAttributes);
+		/**
+		* @brief 
+		* @note 
+		* @param[in]
+		* @param[in]
+		* \exception 
+		* \return error code
+		*/
+		int EndModule(char* pTagName);
+		/**
+		* @brief 
+		* @note 
+		* @param[in]
+		* @param[in]
+		* \exception 
+		* \return error code
+		*/
+		int BuildText(char* pValue,int nLength);	
 		
-		
-		int BuildDocument(char* value);
-		
-		int BuildMenu(CBaseModule* parent, char* value);
-		int BuildPrompt(CBaseModule* parent, char* value);
-		int BuildChoice(CBaseModule* parent, char* value);
-		int BuildNoinput(CBaseModule* parent, char* value);
-
-		CDocumentModule* getProduct();
-
-
-		
+		/**
+		* @brief 
+		* @note 
+		* @param[in]
+		* @param[in]
+		* \exception 
+		* \return error code
+		*/		
+		CDocumentModule* GetProduct(void);
 	private:
 		/**
 		* @brief Get the enmu TagID by tagName
@@ -141,12 +166,31 @@ class CVxmlBuilder {
 		* \return void
 		*/
 		void ToLowerCase(string& str);
+
+		/**
+		* @brief 
+		* @note 
+		* @param[in ]
+		* \exception 
+		* \return void
+		*/
+		void SetErrorCode(int code);
+		/**
+		* @brief 
+		* @note 
+		* @param[in ]
+		* \exception 
+		* \return void
+		*/
+		int GetErrorCode(void);
+
 	/* member variables */
 	private:
 		CDocumentModule*	m_iVxmlDoc;			/**< The product vxml documnet's root pointer	*/
 		// process variables 
 		TVxmlTagIDMap		m_iVxmlTagIDMap;	/**< TagID TagName mapping collection			*/
 		CBaseModule*		m_iCurrentModule;	/**< Current module to be building				*/
+		int					m_nErrorCode;		/**< errorcode									*/
 };
 
 

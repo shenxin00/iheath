@@ -84,11 +84,11 @@ class CBaseModule
 	/* member variables */
 	public:
 		EModuleType		m_eType;		/**< Module's Type				*/
+		string			m_stText;		/**< */
+		CBaseModule	*	m_iParent;		/**< Parent Module 				*/
 	private:
-//		string			m_stValue;		/**< */
 		TAttributes		m_iAttributes;	/**< string based attributes	*/
 		TModules		m_iChildren;	/**< Sub Module's list 			*/
-		CBaseModule	*	m_iParent;		/**< Parent Module 				*/
 
 };
 

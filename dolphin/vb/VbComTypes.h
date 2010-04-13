@@ -60,8 +60,22 @@ typedef enum EN_VXMLMODULE_TYPE{
 	TYPE_VALUE,				///<  <value>				Insert the value of an expression in a prompt
 	TYPE_VAR,				///<  <var>					Declare a variable
 	TYPE_VXML,				///<  <vxml>				Top-level element in each VoiceXML document
+	TYPE_TEXT,				///<  Plain Text			
+//	TYPE_DOCUMENT,			///<  document				Top-level element in each VoiceXML document
 	TYPE_NUM
 }EModuleType;
+
+
+
+
+
+
+typedef stack<CBaseModule*> TActions;
+typedef pair<string,TActions> TEventAction;
+typedef map<string,TActions> TEventActions;
+
+
+
 
 /**************************************************/
 
@@ -80,15 +94,6 @@ typedef struct ST_PROMPT_ITEM {
 
 typedef list<PromptItem> PromptItemVector
 
-
-struct CEvent
-{
-	int Type;
-	CBaseModule *Scope;
-	CBaseModule *context;
-};
-
-typedef list<struct CEvent*> CEventList;
 
 
 

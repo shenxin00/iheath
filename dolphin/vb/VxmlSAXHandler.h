@@ -33,7 +33,7 @@ class VxmlSAXHandler : public DefaultHandler {
 		void fatalError(const SAXParseException& exc);
 		void error(const SAXParseException& exc);
 
-		void setCVxmlBuilder(CVxmlBuilder* Builder);
+		void SetBuilder(CVxmlBuilder* Builder);
 
 	private:
 		/* data */
