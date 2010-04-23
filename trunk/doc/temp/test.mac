@@ -1,0 +1,62 @@
+
+
+
+
+//
+//grep 検索文字列, 検索するファイル, カレントフォルダ 
+// [,word] [,casesense | nocasesense] [,regular | noregular] [,fuzzy] [,subdir] [,icon] [,filelist] [,fullpath] [, hilight | nohilight]
+//
+//
+//grepreplace 検索文字列, 置換文字列, 検索するファイル, カレントフォルダ [,各種フラグ] [,backup] [,preview]
+//
+
+
+
+//grepreplace "アドレス帳", "通讯录" "*.jsp", "." ；
+
+//grepreplace "\uアドレス帳", "\u異","*.c", ".", backup,utf8;
+grepreplacedialog2 "アドレス帳", "異","*.c", ".", backup,utf8;
+
+
+endmacro;
+$file_filter = " *.jsp;*.html;*.js ";
+$search_folder = "D:\\Coffer\\Temp\\test\\ ";
+$option_flg = " noregular,subdir ";
+
+gofiletop;	//ファイル先頭へ..
+
+while( linelen > 0 ) {	
+	selectline;		//置換元文字列..
+	copy;
+	down;
+	selectline;		//置換先文字列..
+	appendcopy;
+	down;
+
+	beginclipboardread;
+	$org_str = getclipboard;
+	$new_str = getclipboard;
+
+	if(strlen($org_str) <= 0 ){
+	//	message "エラー:置換元文字列なし！";
+		endmacro;
+	}
+	if(strlen($new_str) <= 0 ){
+	//	message "エラー:置換先文字列なし！";
+		endmacro;
+	}
+	$org_str = leftstr( $org_str, strlen($org_str) - 1 );
+	$new_str = leftstr( $new_str, strlen($new_str) - 1 );
+
+	//置換実行..
+	message $org_str+","+$new_str+","+$file_filter+","+$search_folder+","+$option_flg;
+	
+	grepreplace $org_str, $new_str, $file_filter, $search_folder, $option_flg;
+
+
+	//debubため
+	message $org_str+"\n"+$new_str+"\n";
+}
+
+message "Over!";
+
