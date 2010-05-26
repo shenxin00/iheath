@@ -1,0 +1,577 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>
+	
+        STM32入门工具篇
+        -
+        Grant_jx的专栏
+        - CSDN博客
+</title>
+
+    <script type="text/javascript">
+        try { document.domain = "csdn.net"; } catch (ex) { }
+    </script>
+
+    <script src="/js/jquery.js" type="text/javascript"></script>
+
+    <script src="/js/SyntaxHighlighter/jquery.highlighter.js?v=20091222" type="text/javascript"></script>
+
+    <script src="/js/SyntaxHighlighter/highlighter.js?v=20091222" type="text/javascript"></script>
+
+    <script src="/js/common.js?v=20091222" type="text/javascript"></script>
+
+    <script src="http://counter.csdn.net/a/js/AreaCounter.js?v=20091222" type="text/javascript"></script>
+
+    <script type="text/javascript" src="/js/feedback.js?v=20100107"></script>
+
+    <script type="text/javascript" src="/js/relatedarticle.js?v=20091222"></script>
+
+
+<script type='text/javascript' src='http://partner.googleadservices.com/gampad/google_service.js'></script>
+<script type='text/javascript'>
+    GS_googleAddAdSenseService("ca-pub-1076724771190722");
+    GS_googleEnableAllServices();
+</script>
+<script type='text/javascript'>
+    GA_googleAddSlot("ca-pub-1076724771190722", "blog_postpage_72890");
+</script>
+<script type='text/javascript'>
+    GA_googleFetchAds();
+</script>
+
+
+    <link href="/css/skin/Cogitation/Cogitation_1.css?v=20091223" type="text/css" rel="stylesheet" media="all"/><link href="/css/csdn_favbykimi.css" type="text/css" rel="stylesheet" media="all" /><link rel="Shortcut Icon" href="http://profile.csdn.net/Grant_jx/picture/1.ico"/><link href="http://feeds.feedsky.com/csdn.net/Grant_jx" title="RSS" type="application/rss+xml" rel="alternate" /></head>
+<body id="defaultuser">
+    <div id="csdnblog_allwrap">
+        <div id="csdnblog_midwrap">
+            
+<script src="http://csdnimg.cn/pubnav/js/pub_topnav.js" type="text/javascript" ></script>
+<script language="javascript" type="text/javascript">
+    // 页面加载完毕，脚本开始执行
+    $(document).ready(function() {
+        ChangeUserState();
+        $("#notice").find("a").click(HideNoticeInfo);
+    });
+    
+    var userName = getCookie("activeUserName");
+    var isGuest = !userName || userName == "Guest";
+    var delay = 20 * 60 * 1000;
+    var timer = 0;
+
+    function ChangeUserState() {        
+        clearInterval(timer);
+        if (isGuest) {
+            HideNoticeInfo();
+        }
+        else {
+            RefreshNoticeInfo();
+            timer = setInterval( RefreshNoticeInfo, delay);
+        }
+    }
+    
+    var apiUrl = "/!handler/NoticeHandler.ashx?jsoncallback=?";
+    function RefreshNoticeInfo() {
+        $.getJSON(apiUrl + "&_t=" + Math.random(), function(result) {
+            if (result.noticeNum) {
+                newNoticeCount = result.noticeNum;
+                if (newNoticeCount <= 0) {
+                    $("#notice").hide();
+                }
+                else {
+                    $("#noticeCount").text(newNoticeCount);
+                    $("#notice").show();
+                }
+            }
+        });
+    }
+    
+    function HideNoticeInfo() {
+        $("#notice").hide();
+    }
+</script>
+
+<div id="csdnblog_header">
+    <h1>
+        <a href="http://blog.csdn.net/Grant_jx">
+            Grant_jx的专栏</a></h1>
+    <h2>
+        </h2>
+    <ul id="personalnav">
+        <li style="display: none;" id="notice"><span class="newnotice"><a class="red" href="http://hi.csdn.net/space-notice.html" target="_blank" onclick='LogClickCount(this,216);'><span id="noticeCount"></span>条新通知</a></span></li>
+        <li style="display: none;"><a id="a_login" href="http://passport.csdn.net/UserLogin.aspx">
+            登录</a></li>
+        <li style="display: none;"><a id="a_register" href="http://passport.csdn.net/CSDNUserRegister.aspx"
+            target="_blank">注册</a></li>
+        <li style="display: none;"><a id="a_welcome" href="http://hi.csdn.net/" target="_blank">
+            欢迎</a></li>
+        <li style="display: none;"><a id="a_exit" href="http://writeblog.csdn.net/Signout.aspx">
+            退出</a></li>
+        <li style="display: none;"><a id="a_myblog" href="http://blog.csdn.net/">我的博客</a></li>
+        <li style="display: none;"><a id="a_configure" href="http://writeblog.csdn.net/configure.aspx"
+            target="_blank">配置</a></li>
+        <li style="display: none;"><a id="a_postedit" href="http://writeblog.csdn.net/PostEdit.aspx"
+            target="_blank">写文章</a></li>
+        <li style="display: none;"><a id="a_postlist" href="http://writeblog.csdn.net/PostList.aspx"
+            target="_blank">文章管理</a></li>
+        <li><a id="a_bloghome" href="http://blog.csdn.net" target="_blank">博客首页</a></li>
+    </ul>
+    <ul id="blogsearchsty">
+        <li>
+            <input id="inputSearch" type="text" class="bolgsearch" /></li>
+        <li class="selectsty">
+            <select name="Search:ddlSearchScope" id="Search_ddlSearchScope">
+                <option value="all">全站</option>
+                <option value="Grant_jx">当前博客</option>
+            </select>
+        </li>
+        <li>
+            <input type="button" id="buttonSearch" value="搜索" class="bolggobtn" /></li>
+    </ul>
+    <ul id="menu">
+        <li><a href="http://hi.csdn.net/Grant_jx" target="_blank">空间</a></li>
+        <li><a class="on" href="http://blog.csdn.net/Grant_jx">博客</a></li>
+        <li><a href="http://hi.csdn.net/!s/friend/list/Grant_jx" target="_blank">好友</a></li>
+        <li><a href="http://hi.csdn.net/!s/album/list/Grant_jx" target="_blank">相册</a></li>
+        <li><a class="last" href="http://hi.csdn.net/!s/wall/to/Grant_jx" target="_blank">
+            留言</a></li>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    var CurrentUserName = 'Grant_jx';
+</script>
+
+
+            
+<div id="csdnblog_sidebar">
+	<div class="gutter">
+		<div class="aboutauthor">
+			<dl>
+				<dt>用户操作</dt>
+				<dd class="middle">
+					<a href="http://hi.csdn.net/!s/wall/to/Grant_jx" target="_blank">[留言]</a>&nbsp;
+					<a href="http://hi.csdn.net/!s/msg/to/Grant_jx" target="_blank">[发消息]</a>&nbsp;
+					<a href="http://hi.csdn.net/!s/friend/add/Grant_jx" target="_blank">[加为好友]</a>&nbsp;
+				</dd>
+				<span id="userInfo"></span>
+				<span id="SubscriptionList">
+					<dt>订阅我的博客</dt>
+					<dd>
+						<a href="http://feeds.feedsky.com/csdn.net/Grant_jx">
+							<img border="0" alt="XML聚合" src="http://img.feedsky.com/feeds/csdn.net/Grant_jx/sc/gif"/>
+						</a>&nbsp;&nbsp;
+						<a href="http://feeds.feedsky.com/csdn.net/Grant_jx" target="_blank">
+							<img border="0" alt="FeedSky" src="/images/feedsky.gif"/>
+						</a>
+					</dd>
+					<dd>
+						<a href="http://www.xianguo.com/subscribe.php?url=http://feeds.feedsky.com/csdn.net/Grant_jx" target="_blank">
+							<img border="0" alt="订阅到鲜果" src="/images/rss_xianguo.jpg"/>
+						</a>
+					</dd>
+					<dd>
+						<a href="http://fusion.google.com/add?feedurl=http://feeds.feedsky.com/csdn.net/Grant_jx" target="_blank">
+							<img border="0" alt="订阅到Google" src="/images/rss_google.gif"/>
+						</a>
+					</dd>
+					<dd>
+						<a href="http://www.zhuaxia.com/add_channel.php?url=http://feeds.feedsky.com/csdn.net/Grant_jx" target="_blank">
+							<img border="0" alt="订阅到抓虾" src="/images/rss_zhuaxia.gif"/>
+						</a>
+					</dd>
+				</span>
+				<dt>
+					<span class="floatright" style="display:none;"><a class="a_edit" href="http://writeblog.csdn.net/configure.aspx" target="_blank">[编辑]</a></span>Grant_jx的公告
+				</dt>
+				<dd>这里我收录自己的原创。</dd>
+				<dt><span class="floatright" style="display:none;"><a class="a_edit" href="http://writeblog.csdn.net/EditCategories.aspx?catID=1" target="_blank">[编辑]</a></span>文章分类</dt>
+				<dd>
+					<div class="publiclist_sidebar">
+						<ul><li><a href="/Grant_jx/category/230959.aspx/rss"><img src="/images/rss.gif" alt="(RSS)"></a><a href="/Grant_jx/category/230959.aspx">BLDC Control</a></li><li><a href="/Grant_jx/category/230953.aspx/rss"><img src="/images/rss.gif" alt="(RSS)"></a><a href="/Grant_jx/category/230953.aspx">CAN BUS</a></li><li><a href="/Grant_jx/category/388886.aspx/rss"><img src="/images/rss.gif" alt="(RSS)"></a><a href="/Grant_jx/category/388886.aspx">Ethernet</a></li><li><a href="/Grant_jx/category/230951.aspx/rss"><img src="/images/rss.gif" alt="(RSS)"></a><a href="/Grant_jx/category/230951.aspx" title="介绍ST7/STM8 8bit MCU使用心得">ST7/STM8 MCU</a></li><li><a href="/Grant_jx/category/230952.aspx/rss"><img src="/images/rss.gif" alt="(RSS)"></a><a href="/Grant_jx/category/230952.aspx" title="介绍ST基于ARM公司Cortex-M3核的32bit MCU使用心得">STM32</a></li><li><a href="/Grant_jx/category/376540.aspx/rss"><img src="/images/rss.gif" alt="(RSS)"></a><a href="/Grant_jx/category/376540.aspx">杂项</a></li></ul>
+					</div>
+				</dd>
+				
+				
+				<dt>存档</dt>
+				<dd>
+					<div class="publiclist_sidebar">
+						<ul><li><a href="/Grant_jx/archive/2009/09.aspx">2009年09月(3)</a></li><li><a href="/Grant_jx/archive/2008/08.aspx">2008年08月(1)</a></li><li><a href="/Grant_jx/archive/2008/04.aspx">2008年04月(5)</a></li><li><a href="/Grant_jx/archive/2006/08.aspx">2006年08月(1)</a></li></ul>
+					</div>
+				</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+
+            
+<div id="csdnblog_content">
+    <div class="gutter">
+        <div class="default_contents">
+            <div class="user_article">
+
+                <script type="text/javascript" src="/js/feedbackcount.js"></script>
+
+                <h1 class="title_txt">
+                    <img src="/images/authorship.gif" border="0" width="15" height="15" alt="原创"/>&nbsp;
+                    STM32入门工具篇
+                    <cite class="fav_csdnstylebykimi"><a href="JavaScript:d=document;t=d.selection?(d.selection.type!='None'?d.selection.createRange().text:''):(d.getSelection?d.getSelection():'');void(saveit=window.open('http://wz.csdn.net/storeit.aspx?t='+escape(d.title)+'&u='+escape(d.location.href)+'&c='+escape(t),'saveit','scrollbars=no,width=590,height=300,left=75,top=20,status=no,resizable=yes'));saveit.focus();"
+                        class="fav_csdnstylebykimi" title="收藏到我的网摘中，并分享给我的朋友">收藏</a> </cite>
+                    
+                </h1>
+                <div class="blogstory">
+
+                    <script type="text/javascript">
+                        document.body.oncopy = function() {
+                            if (window.clipboardData) {
+                                setTimeout(function() {
+                                    var text = clipboardData.getData("text");
+                                    if (text && text.length > 300) {
+                                        text = text + "\r\n\n本文来自CSDN博客，转载请标明出处：" + location.href;
+                                        clipboardData.setData("text", text);
+                                    }
+                                }, 100);
+                            }
+                        }
+					</script>
+
+                    <script type="text/javascript">                        function StorePage() { d = document; t = d.selection ? (d.selection.type != 'None' ? d.selection.createRange().text : '') : (d.getSelection ? d.getSelection() : ''); void (keyit = window.open('http://www.365key.com/storeit.aspx?t=' + escape(d.title) + '&u=' + escape(d.location.href) + '&c=' + escape(t), 'keyit', 'scrollbars=no,width=475,height=575,left=75,top=20,status=no,resizable=yes')); keyit.focus(); }</script>
+
+                    <P align=center><FONT face=Arial>STM32入门工具篇</FONT></P>
+<P align=center><FONT face=Arial></FONT>&nbsp;</P>
+<P align=left><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;介绍一下STM32开发都有什么工具，资料需要到什么地方下载。</FONT></P>
+<P><BR><STRONG><FONT face=Arial>一、STM32资料</FONT></STRONG></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;ST对于其新的32bit MCU平台的重视程度可从其提供的应用笔记的数量和相应的参考代码上可见一斑。<BR></FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;STM32的全部英文官方版本下载地址：<BR>&nbsp;&nbsp;&nbsp;&nbsp;</FONT><A href="http://www.st.com/mcu/familiesdocs-110.html#Application%20Note"><FONT face=Arial>http://www.st.com/mcu/familiesdocs-110.html#Application%20Note</FONT></A><BR><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;这个地址可以下载到STM32全部应用笔记、笔记对于参考代码、数据手册、器件参考手册、固件库手册、固件库源码、官方开发板用户手册、开发板演示代码等详解的资料。这些都是学习STM32朋友必看资料。<BR>&nbsp;&nbsp;&nbsp; </FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;STM32官方提供中文资料的下载地址：<BR>&nbsp;&nbsp;&nbsp;&nbsp;</FONT><A href="http://www.stmicroelectronics.com.cn/stonline/mcu/MCU_Pages.htm"><FONT face=Arial>http://www.stmicroelectronics.com.cn/stonline/mcu/MCU_Pages.htm</FONT></A><BR><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;这个地址目前仅提供用户手册、固件库用户手册、器件参考手册的中文翻译版本，需要注意的是这些中文的版本都不是跟随英文的最新版本提供的，在使用的时候如果发现有任何疑问，请参考最新的英文版本为准。</FONT></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;哪些资料是开发STM32必须的？<BR></FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;STM32F103x Datasheet<BR>&nbsp;&nbsp;&nbsp;&nbsp;</FONT><A href="http://www.st.com/stonline/products/literature/ds/13587.pdf"><FONT face=Arial>http://www.st.com/stonline/products/literature/ds/13587.pdf</FONT></A></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp; </FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;STM32F101x Datasheet<BR>&nbsp;&nbsp;&nbsp;&nbsp;</FONT><A href="http://www.st.com/stonline/products/literature/ds/13586.pdf"><FONT face=Arial>http://www.st.com/stonline/products/literature/ds/13586.pdf</FONT></A></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp; </FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;STM32F101xC/D/E Datasheet<BR>&nbsp;&nbsp;&nbsp;&nbsp;</FONT><A href="http://www.st.com/stonline/products/literature/ds/14610.pdf"><FONT face=Arial>http://www.st.com/stonline/products/literature/ds/14610.pdf</FONT></A></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;STM32F103xC/D/E Datasheet<BR>&nbsp;&nbsp;&nbsp;&nbsp;</FONT><A href="http://www.st.com/stonline/products/literature/ds/14611.pdf"><FONT face=Arial>http://www.st.com/stonline/products/literature/ds/14611.pdf</FONT></A></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;STM32F101xC/D/E Rev Z errata sheet<BR>&nbsp;&nbsp;&nbsp;&nbsp;</FONT><A href="http://www.st.com/stonline/products/literature/es/14732.pdf"><FONT face=Arial>http://www.st.com/stonline/products/literature/es/14732.pdf</FONT></A></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp; </FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;STM32F10xx6/8/B errata sheet<BR>&nbsp;&nbsp;&nbsp;&nbsp;</FONT><A href="http://www.st.com/stonline/products/literature/es/14574.pdf"><FONT face=Arial>http://www.st.com/stonline/products/literature/es/14574.pdf</FONT></A></P>
+<P><BR><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;Medium- and High-density STM32F101xx and STM32F103xx advanced ARM-based 32-bit MCUs Reference Manual<BR>&nbsp;&nbsp;&nbsp;&nbsp;英文版：</FONT><A href="http://www.st.com/stonline/products/literature/rm/13902.pdf"><FONT face=Arial>http://www.st.com/stonline/products/literature/rm/13902.pdf</FONT></A><BR><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;中文版：</FONT><A href="http://www.stmicroelectronics.com.cn/stonline/mcu/images/STM32F10xxx_Library_Manual_ChineseV2.pdf"><FONT face=Arial>http://www.stmicroelectronics.com.cn/stonline/mcu/images/STM32F10xxx_Library_Manual_ChineseV2.pdf</FONT></A></P>
+<P><BR><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;ARM-based 32-bit MCU STM32F101xx and STM32F103xx firmware library<BR>&nbsp;&nbsp;&nbsp;&nbsp;英文版：</FONT><A href="http://www.st.com/stonline/products/literature/um/13475.pdf"><FONT face=Arial>http://www.st.com/stonline/products/literature/um/13475.pdf</FONT></A><BR><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;中文版：</FONT><A href="http://www.stmicroelectronics.com.cn/stonline/mcu/images/STM32F10xxx_Reference_Manual_Chinese2.pdf"><FONT face=Arial>http://www.stmicroelectronics.com.cn/stonline/mcu/images/STM32F10xxx_Reference_Manual_Chinese2.pdf</FONT></A><BR><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;代码：</FONT><A href="http://www.st.com/stonline/products/support/micro/files/um0427.zip"><FONT face=Arial>http://www.st.com/stonline/products/support/micro/files/um0427.zip</FONT></A></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;</FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;STM32F10xxx USB developer kit&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;手册：</FONT><A href="http://www.st.com/stonline/products/literature/um/13465.pdf"><FONT face=Arial>http://www.st.com/stonline/products/literature/um/13465.pdf</FONT></A><BR><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;代码：</FONT><A href="http://www.st.com/stonline/products/support/micro/files/um0424.zip"><FONT face=Arial>http://www.st.com/stonline/products/support/micro/files/um0424.zip</FONT></A></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P style="FONT-SIZE: 10pt"><BR><FONT face=Arial><STRONG>二、STM32的开发软件</STRONG><BR>1、IAR<BR>&nbsp;&nbsp;&nbsp;&nbsp;应该是使用STM32开发使用最多的软件平台。IAR官方提供IAR for ARM 两种类型的版本供免费评估：</FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;1)、32K学习版，只能支持编译32K目标代码，等效无时间限制<BR>&nbsp;&nbsp;&nbsp;&nbsp;</FONT><A href="http://supp.iar.com/Download/SW/?item=EWARM-KS32"><FONT face=Arial>http://supp.iar.com/Download/SW/?item=EWARM-KS32</FONT></A></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;2)、30天评估版，无编译代码限制<BR>&nbsp;&nbsp;&nbsp;&nbsp;</FONT><A href="http://supp.iar.com/Download/SW/?item=EWARM-EVAL"><FONT face=Arial>http://supp.iar.com/Download/SW/?item=EWARM-EVAL</FONT></A></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp; </FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;Note：需要注意上述的两种版本都是不含库文件的源代码，不支持MISRA C规则编译。</FONT></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P><FONT face=Arial>2、MDK<BR>&nbsp;&nbsp;&nbsp;&nbsp;自从keil被ARM收购以后，在keil中集成了ARM自己的编译器，改名MDK。<BR></FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;中文版下载地址：<BR>&nbsp;&nbsp;&nbsp;&nbsp;</FONT><A href="http://www.realview.com.cn/ApplyDEMO.asp?id=486&amp;xingqu=RealView%20MDK%203.22%20"><FONT face=Arial>http://www.realview.com.cn/ApplyDEMO.asp?id=486&amp;xingqu=RealView%20MDK%203.22%20</FONT></A><FONT face=Arial>评估版。</FONT></P>
+<P><BR><FONT face=Arial>3、RIDE<BR>&nbsp;&nbsp;&nbsp;&nbsp;</FONT><A href="http://www.raisonance.com/products/info/RIDE.php"><FONT face=Arial>http://www.raisonance.com/products/info/RIDE.php</FONT></A><BR><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;该软件支持GCC编译器开发STM32产品。</FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;最新版本的下载地址：<BR>&nbsp;&nbsp;&nbsp;&nbsp;</FONT><A href="http://www.raisonance.com/download/index.php?active=RIDE7"><FONT face=Arial>http://www.raisonance.com/download/index.php?active=RIDE7</FONT></A></P>
+<P><BR><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;还有其它不太流行的就不详述了。</FONT></P>
+<P><BR><FONT face=Arial><STRONG>三、开发板<BR></STRONG>1、ST官方版本</FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;1)、STM3210B-EVAL<BR>&nbsp;&nbsp;&nbsp;&nbsp;开发板的演示软件向导：</FONT></P>
+<P><FONT face=Arial color=#07519a>&nbsp;&nbsp;&nbsp;&nbsp;</FONT><A href="http://www.st.com/stonline/products/literature/um/13534.pdf"><FONT face=Arial>http://www.st.com/stonline/products/literature/um/13534.pdf</FONT></A><BR><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;开发板的演示软件源代码：</FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;</FONT><A></A><A href="http://www.st.com/stonline/products/support/micro/files/um0435.zip"><FONT face=Arial>http://www.st.com/stonline/products/support/micro/files/um0435.zip</FONT></A><BR><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;开发板用户手册：</FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;</FONT><A href="http://www.st.com/stonline/products/literature/um/13472.pdf"><FONT face=Arial>http://www.st.com/stonline/products/literature/um/13472.pdf</FONT></A></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;2)、STM3210E-EVAL<BR>&nbsp;&nbsp;&nbsp;&nbsp;开发板的演示软件向导：</FONT></P>
+<P><FONT face=Arial color=#07519a>&nbsp;&nbsp;&nbsp;&nbsp;</FONT><A href="http://www.st.com/stonline/products/literature/um/14703.pdf"><FONT face=Arial>http://www.st.com/stonline/products/literature/um/14703.pdf</FONT></A><BR><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;开发板的演示软件源代码：</FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;</FONT><A href="http://www.st.com/stonline/products/support/micro/files/um0549.zip"><FONT face=Arial>http://www.st.com/stonline/products/support/micro/files/um0549.zip</FONT></A><BR><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;开发板用户手册：</FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;</FONT><A href="http://www.st.com/stonline/products/literature/um/14703.pdf"><FONT face=Arial>http://www.st.com/stonline/products/literature/um/14703.pdf</FONT></A></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P><FONT face=Arial>2、Keil版本<BR>&nbsp;&nbsp;&nbsp;&nbsp;1)、keil MCBSTM32 － (</FONT><A href="http://www.keil.com/mcbstm32/"><FONT face=Arial>http://www.keil.com/mcbstm32/</FONT></A><FONT face=Arial>)<BR>&nbsp;&nbsp;&nbsp;&nbsp;规格：</FONT><A href="http://www.keil.com/mcbstm32/specs.asp"><FONT face=Arial>&nbsp;&nbsp;&nbsp; http://www.keil.com/mcbstm32/specs.asp</FONT></A><BR><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;原理图：</FONT><A href="http://www.keil.com/mcbstm32/mcbstm32-schematics.pdf"><FONT face=Arial>http://www.keil.com/mcbstm32/mcbstm32-schematics.pdf</FONT></A></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp; </FONT></P>
+<P><FONT face=Arial><BR></FONT></P>
+<P align=center><FONT face=Arial><IMG height=345 alt="" src="http://p.blog.csdn.net/images/p_blog_csdn_net/Grant_jx/EntryImages/20080826/keil%20mcbstm32.jpg" width=480></FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;2)、keil MCBSTM32E － (</FONT><A href="http://www.keil.com/mcbstm32e/"><FONT face=Arial>http://www.keil.com/mcbstm32e/</FONT></A><FONT face=Arial>)<BR>&nbsp;&nbsp;&nbsp;&nbsp;规格：&nbsp;&nbsp;&nbsp; </FONT><A href="http://www.keil.com/mcbstm32e/specs.asp"><FONT face=Arial>http://www.keil.com/mcbstm32e/specs.asp</FONT></A><BR><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;原理图：</FONT><A href="http://www.keil.com/mcbstm32e/mcbstm32e-base-board-schematics.pdf"><FONT face=Arial>http://www.keil.com/mcbstm32e/mcbstm32e-base-board-schematics.pdf</FONT></A><BR><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT><A href="http://www.keil.com/mcbstm32e/mcbstm32e-display-board-schematics.pdf"><FONT face=Arial>http://www.keil.com/mcbstm32e/mcbstm32e-display-board-schematics.pdf</FONT></A></P>
+<P align=center><FONT face=Arial><IMG height=364 alt="" src="http://p.blog.csdn.net/images/p_blog_csdn_net/Grant_jx/EntryImages/20080826/mcbstm32e.jpg" width=476></FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </FONT></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P><FONT face=Arial>3、IAR版本</FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;STM32-SK － (</FONT><A href="http://www.iar.com/website1/1.0.1.0/658/1/index.php?item=prod_prod-s1/225&amp;group=prod_prod_grp-s1/33"><FONT face=Arial>http://www.iar.com/website1/1.0.1.0/658/1/index.php?item=prod_prod-s1/225&amp;group=prod_prod_grp-s1/33</FONT></A><FONT face=Arial>)</FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <IMG alt="" src="http://p.blog.csdn.net/images/p_blog_csdn_net/Grant_jx/EntryImages/20080826/STM32-SK.jpg">&nbsp;&nbsp;&nbsp; </FONT></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P><FONT face=Arial>4、万利版本</FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;EK-STM32F － (</FONT><A href="http://www.manley.com.cn/web/product_neirong_01.asp?pro=262"><FONT face=Arial>http://www.manley.com.cn/web/product_neirong_01.asp?pro=262</FONT></A><FONT face=Arial>)</FONT></P>
+<P align=center><FONT face=Arial></FONT>&nbsp;</P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P><FONT face=Arial><IMG height=591 alt="" src="http://p.blog.csdn.net/images/p_blog_csdn_net/Grant_jx/EntryImages/20080827/EK-STM32F.jpg" width=800 align=center>5、</FONT></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P><FONT face=Arial>5、Raisonance版本<BR></FONT></P>
+<P><FONT face=Arial></FONT>
+<P><SPAN lang=NO-BOK style="FONT-SIZE: 9pt; COLOR: #333333; mso-ansi-language: NO-BOK"><?xml:namespace prefix = o ns = "urn:schemas-microsoft-com:office:office" /><o:p><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;1)、STM32 Primer － (</FONT><A href="http://www.raisonance.com/arm/STM32/Primer.php#pro"><FONT face=Arial>http://www.raisonance.com/arm/STM32/Primer.php#pro</FONT></A><FONT face=Arial>)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; </FONT></o:p></SPAN></P>
+<P><SPAN lang=NO-BOK style="FONT-SIZE: 9pt; COLOR: #333333; mso-ansi-language: NO-BOK"><o:p><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;</FONT><A href="http://www.stm32circle.com/hom/index.php"><FONT face=Arial>http://www.stm32circle.com/hom/index.php</FONT></A></o:p></SPAN></P>
+<P><SPAN lang=NO-BOK style="FONT-SIZE: 9pt; COLOR: #333333; mso-ansi-language: NO-BOK"><o:p><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;</FONT></o:p></SPAN></P>
+<P><SPAN lang=NO-BOK style="FONT-SIZE: 9pt; COLOR: #333333; mso-ansi-language: NO-BOK"><o:p><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;2)、REV_STM32</FONT></o:p></SPAN></P>
+<P><SPAN lang=NO-BOK style="FONT-SIZE: 9pt; COLOR: #333333; mso-ansi-language: NO-BOK"><o:p><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </FONT></o:p></SPAN></P><SPAN lang=NO-BOK style="FONT-SIZE: 9pt; COLOR: #333333; mso-ansi-language: NO-BOK"><o:p></o:p></SPAN>
+<P align=center><FONT face=Arial><IMG height=324 alt="" src="http://p.blog.csdn.net/images/p_blog_csdn_net/Grant_jx/EntryImages/20080826/REVA3_STM32_small.jpg" width=450></FONT></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P><SPAN lang=NO-BOK style="FONT-SIZE: 9pt; COLOR: #333333; mso-ansi-language: NO-BOK"><o:p></o:p></SPAN><FONT face=Arial>&nbsp;</FONT></P>
+<P><FONT face=Arial></FONT></P>
+<P><FONT face=Arial></FONT>
+<P><BR><FONT face=Arial>四、调试工具：<BR>1、J-Link&nbsp; － (</FONT><A href="http://www.iar.com/jlinkarm"><FONT face=Arial>http://www.iar.com/jlinkarm</FONT></A><FONT face=Arial>)</FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;支持开发环境有IAR for ARM、MDK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </FONT></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P align=center><FONT face=Arial><IMG height=347 alt="" src="http://p.blog.csdn.net/images/p_blog_csdn_net/Grant_jx/EntryImages/20080826/JLink.jpg" width=523></FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp; </FONT></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P><FONT face=Arial>2、JTrace&nbsp; － (</FONT><A href="http://www.iar.com/jtrace"><FONT face=Arial>http://www.iar.com/jtrace</FONT></A><FONT face=Arial>)</FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;仅支持IAR for ARM、MDK<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </FONT></P>
+<P align=center><FONT face=Arial><IMG alt="" src="http://p.blog.csdn.net/images/p_blog_csdn_net/Grant_jx/EntryImages/20080826/JTrace.jpg"></FONT></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P><FONT face=Arial>3、ULink 2&nbsp; － (</FONT><A href="http://www.keil.com/ulink2/"><FONT face=Arial>http://www.keil.com/ulink2/</FONT></A><FONT face=Arial>)</FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;仅支持MDK&nbsp;&nbsp;&nbsp; </FONT></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P align=center><FONT face=Arial><IMG alt="" src="http://p.blog.csdn.net/images/p_blog_csdn_net/Grant_jx/EntryImages/20080826/ulink2.jpg"></FONT></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P><FONT face=Arial>4、ULink Me&nbsp; － (</FONT><A href="http://www.keil.com/ulinkme/"><FONT face=Arial>http://www.keil.com/ulinkme/</FONT></A><FONT face=Arial>)</FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;仅支持MDK</FONT></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P align=center><FONT face=Arial><IMG alt="" src="http://p.blog.csdn.net/images/p_blog_csdn_net/Grant_jx/EntryImages/20080827/ulinkme.jpg"></FONT></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P><FONT face=Arial>5、STX-RLINK&nbsp;Pro&nbsp;－ (</FONT><A href="http://www.raisonance.com/products/RLink.php"><FONT face=Arial>http://www.raisonance.com/products/RLink.php</FONT></A><FONT face=Arial>)</FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;仅支持RIDE7&nbsp;&nbsp;&nbsp;</FONT></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P align=center><FONT face=Arial><IMG alt="" src="http://p.blog.csdn.net/images/p_blog_csdn_net/Grant_jx/EntryImages/20080826/RLink%20Pro.gif"></FONT></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P><FONT face=Arial>6、ST－Link II － (</FONT><A href="http://www.manley.com.cn/web/product_neirong_01.asp?pro=105"><FONT face=Arial>http://www.manley.com.cn/web/product_neirong_01.asp?pro=105</FONT></A><FONT face=Arial>)</FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;IAR for ARM、MDK</FONT></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P><FONT face=Arial><IMG alt="" src="http://p.blog.csdn.net/images/p_blog_csdn_net/Grant_jx/EntryImages/20080827/ST%20Link2.jpg"></FONT></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P><FONT face=Arial>7、wiggler + H-JTAG － (</FONT><A href="http://www.hjtag.com/"><FONT face=Arial>http://www.hjtag.com/</FONT></A><FONT face=Arial>)</FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;在ARM7上支持IAR for ARM、MDK，在STM32上未测试，不详。</FONT></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P align=center><FONT face=Arial><IMG alt="" src="http://p.blog.csdn.net/images/p_blog_csdn_net/Grant_jx/EntryImages/20080827/HJTAG.gif"></FONT></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P><FONT face=Arial>五、编程软件<BR>1、RFlasher&nbsp; － (</FONT><A href="http://www.raisonance.com/products/RFlasher.php"><FONT face=Arial>http://www.raisonance.com/products/RFlasher.php</FONT></A><FONT face=Arial>)</FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;硬件仅支持RLink、RLink-Pro，编程目标文件大小无任何限制。</FONT></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P align=center><FONT face=Arial><IMG alt="" src="http://p.blog.csdn.net/images/p_blog_csdn_net/Grant_jx/EntryImages/20080827/RFlash.jpg"></FONT></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P><FONT face=Arial>2、JFlash － (</FONT><A href="http://www.segger.com/jlink_arm_software_jflash.html"><FONT face=Arial>http://www.segger.com/jlink_arm_software_jflash.html</FONT></A><FONT face=Arial>)</FONT></P>
+<P><FONT face=Arial>&nbsp;&nbsp;&nbsp;&nbsp;硬件支持JLink，但需要Licence配合使用。</FONT></P>
+<P><FONT face=Arial></FONT>&nbsp;</P>
+<P align=center><FONT face=Arial><IMG alt="" src="http://p.blog.csdn.net/images/p_blog_csdn_net/Grant_jx/EntryImages/20080827/JFlash.jpg"></FONT></P>
+<P><FONT face=Arial><BR></FONT></P>
+<P><FONT face=Arial></FONT></P>
+                    <p class="right articalinfo">
+                        发表于 @
+                        2008年08月26日　23:23:00&nbsp;&#124; <a id="a_comment" href="#FeedBack" title="评论">评论( <span
+                            id="FeedbackCount_2835449">loading...</span>
+
+                            <script type="text/javascript">
+                                AddFeedbackCountStack("2835449")
+							</script>
+
+                            ) </a>&#124; <span style="display: none;"><a class="a_edit" href="http://writeblog.csdn.net/PostEdit.aspx?entryId=2835449"
+                                title="编辑">编辑</a>&#124</span> <a href='m&#97;ilto&#58;webmaster&#64;csdn&#46;net?subject=Article%20Report!!!&body=Author:Grant_jx%0D%0AURL:http://blog.csdn.net/ArticleContent.aspx?UserName=Grant_jx&Entryid=2835449'>
+                                    举报</a>&#124; <cite class="fav_csdnstylebykimi"><a href="JavaScript:d=document;t=d.selection?(d.selection.type!='None'?d.selection.createRange().text:''):(d.getSelection?d.getSelection():'');void(saveit=window.open('http://wz.csdn.net/storeit.aspx?t='+escape(d.title)+'&u='+escape(d.location.href)+'&c='+escape(t),'saveit','scrollbars=no,width=590,height=300,left=75,top=20,status=no,resizable=yes'));saveit.focus();"
+                                        class="fav_csdnstylebykimi" title="收藏到我的网摘中，并分享给我的朋友">收藏</a> </cite>
+                    </p>
+                    <span id="Post.ascx_ViewPost_PreviousAndNextEntriesDown">
+                        <h3 class="pagego">
+                            <a href="/Grant_jx/archive/2008/04/05/2253362.aspx">旧一篇:ST7 汇编</a>&nbsp;|&nbsp;<a href="/Grant_jx/archive/2009/09/07/4529452.aspx">新一篇:STM8 开发环境、最小项目工程、最小系统</a></h3>
+                    </span>
+                    <div style="text-align: left;">
+
+<!-- ca-pub-1076724771190722/blog_postpage_72890 -->
+<script type='text/javascript'>
+    GA_googleFillSlot("blog_postpage_72890");
+</script>
+
+                    </div>
+                    <div class="mutualitys">
+                        <dl>
+                            <dt><span><a onclick="LogClickCount(this,215)" target="_blank" href="http://blog.csdn.net">
+                                查看最新精华文章 请访问博客首页</a></span>相关文章</dt>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <a name="FeedBack"></a>
+
+            <script type="text/javascript">
+                var CurrentEntryId = '2835449';
+                var CurArticleTitle = 'STM32入门工具篇';
+                var AllowComment = 'True';
+                var AllowAnonymousComment = /^true$/i.test('True');
+            </script>
+
+            <div class="commentslist" id="commentslist">
+            </div>
+
+            <script type="text/javascript" src="/js/CsdnDialog.js"></script>
+
+            <script type="text/javascript">
+                function ChangeIdentifyingCode() {
+                    var url = $('#imgValidationCode').attr('src');
+                    if (!(/&d=[\d\.]+$/).test(url)) url += "&d=1";
+                    url = url.replace(/&d=[\d\.]+$/, "&d=" + Math.random());
+                    $('#imgValidationCode').attr('src', url);
+                }
+
+                function OpenLoginDialog() {
+                    element = document.getElementById("loginBtn");
+                    var position = absolutePoint(element);
+
+                    var dialogTop = position.y - 400;
+                    var dialogLeft = position.x - 220;
+                    var dialogWidth = 435;
+                    var dialogHeight = 420;
+
+                    showWindow({ url: 'http://passport.csdn.net/UserLogin.aspx?show=replyLogin&from=http%3a%2f%2fblog.csdn.net%2f!tools%2fLoginSussess.aspx'
+                        , title: '登录'
+                        , top: dialogTop
+                        , left: dialogLeft
+                        , width: dialogWidth
+                        , height: dialogHeight
+                    });
+                }
+
+                function closeDialog(needRefresh) {
+                    closeWindow();
+                    if (needRefresh) {
+                        var url = location.href;
+                        if ((/\?/g).test(url))
+                            url = url.replace(/\?.*$/g, ("?" + Math.random()).replace(/\./g, ""));
+                        else url += ("?" + Math.random()).replace(/\./g, "");
+                        location.href = url;
+                    }
+                    $("#SubmitFeedback").unbind("click");
+                    $("#SubmitFeedback").bind("click", PostContent);
+                }
+
+                function absolutePoint(element) {
+                    var result = { x: element.offsetLeft, y: element.offsetTop };
+                    element = element.offsetParent;
+                    while (element) {
+                        result.x += element.offsetLeft;
+                        result.y += element.offsetTop;
+                        element = element.offsetParent;
+                    }
+                    return result;
+                }
+            </script>
+
+            <div class="commentnew">
+                <dl>
+                    <dt>
+                        <ul>
+                            <li class="left">发表评论</li>
+
+                            <script src="http://svc.csdn.net/ColumnService/RandomColumnContentJS.aspx?id=835ac618-5f1a-41b2-b4dc-716234f8d656&c=1&t=li"
+                                type="text/javascript"></script>
+
+                        </ul>
+                    </dt>
+                    <dd>
+                        <ul>
+                            <li class="lefttop">表 情：</li>
+                            <li class="right"><a href="#" onclick="return false;">
+                                <img title="顶" alt="顶" class="brow" src="/images/emotions/e01.gif" /></a> <a href="#"
+                                    onclick="return false;">
+                                    <img title="砸" alt="砸" class="brow" src="/images/emotions/e02.gif" /></a> <a href="#"
+                                        onclick="return false;">
+                                        <img title="棒" alt="棒" class="brow" src="/images/emotions/e03.gif" /></a>
+                                <a href="#" onclick="return false;">
+                                    <img title="大笑" alt="大笑" class="brow" src="/images/emotions/e04.gif" /></a>
+                                <a href="#" onclick="return false;">
+                                    <img title="愤怒" alt="愤怒" class="brow" src="/images/emotions/e05.gif" /></a>
+                                <a href="#" onclick="return false;">
+                                    <img title="大哭" alt="大哭" class="brow" src="/images/emotions/e06.gif" /></a>
+                                <a href="#" onclick="return false;">
+                                    <img title="疑问" alt="疑问" class="brow" src="/images/emotions/e07.gif" /></a>
+                                <a href="#" onclick="return false;">
+                                    <img title="汗" alt="汗" class="brow" src="/images/emotions/e08.gif" /></a> <a href="#"
+                                        onclick="return false;">
+                                        <img title="呕吐" alt="呕吐" class="brow" src="/images/emotions/e09.gif" /></a>
+                                <a href="#" onclick="return false;">
+                                    <img title="送花" alt="送花" class="brow" src="/images/emotions/e10.gif" /></a>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li class="left">评论内容：</li>
+                            <li class="right">
+                                <textarea id="content" class="textarea" onkeydown="if(event.ctrlKey && event.keyCode==13){return $('#SubmitFeedback').click();}"></textarea>
+                            </li>
+                        </ul>
+                        <div>
+                            <ul>
+                                <li class="left">用 户 名：</li>
+                                <li class="right"><span id="loginTips" class="right" style="display: none;"><a href="javascript:void(0);"
+                                    onclick="OpenLoginDialog(this);return false;" class="red" id="loginBtn">登录</a> <a
+                                        href="http://passport.csdn.net/CSDNUserRegister.aspx" target="_blank" class="red">
+                                        注册</a> </span><span class="right" style="display: none;">
+                                            <input type="checkbox" id="anonymous" class="checkbox" />匿名评论 </span><span id="commentUser"
+                                                class="left"></span></li>
+                            </ul>
+                        </div>
+                        <ul style="display: none;">
+                            <li class="left">验 证 码：</li>
+                            <li class="right">
+                                <input id="code" type="text" class="input" />
+                                <a href="javascript:ChangeIdentifyingCode()">
+                                    <img id="imgValidationCode" alt="验证码" style="vertical-align: middle;" src="http://comments.blog.csdn.net/AntiBotImage.ashx?entryId=2835449" /></a>
+                                <a href="javascript:ChangeIdentifyingCode()">重新获得验证码</a> </li>
+                        </ul>
+                        <ul>
+                            <li class="left">&nbsp;</li>
+                            <li class="right">
+                                <input id="SubmitFeedback" type="button" value="发表评论" class="submitbtn" />
+                                
+                            </li>
+                        </ul>
+                    </dd>
+                    <dd style="float:left; text-align:left; padding-left:15px; width:300px;">
+
+                        <script type="text/javascript"><!--
+                            google_ad_client = "pub-1076724771190722";
+                            google_ad_slot = "2166389617";
+                            google_ad_width = 300;
+                            google_ad_height = 250;
+                        //-->
+                        </script>
+
+                        <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+                        </script>
+
+                    </dd>
+                </dl>
+            </div>
+
+            <script type="text/javascript">
+                LoadFeedbackCount();
+                document.write("<img src='http://counter.csdn.net/pv.aspx?id=24' border=0 width=0 height=0>");
+			</script>
+
+        </div>
+    </div>
+</div>
+
+            
+<script src="http://csdnimg.cn/pubfooter/js/publib_footer.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://www.csdn.net/ui/scripts/Csdn/counter.js"></script>
+<script type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+<script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-2688088-9");
+        pageTracker._trackPageview();
+    } catch (err) { }
+</script>
+
+
+        </div>
+    </div>
+    <img src='/!handler/count.aspx?blogid=116726&entryid=2835449&title=STM32入门工具篇&url=http://www.google.co.jp/search?q=stm32&hl=zh-CN&newwindow=1&safe=active&prmd=lb&start=30&sa=N' height=0 width=0>
+</body>
+</html>
