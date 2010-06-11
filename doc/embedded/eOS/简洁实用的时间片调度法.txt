@@ -1,0 +1,197 @@
+在OURAVR潜水有段时间了，学到不少东西，参考一些资料，我写了一个简洁实用的时间片调度法操作系统，在我的一些产品中已经应用，非常稳定，在再献给大家
+
+// RTOS HEAD FILE
+
+#ifndef _RTOS_T0_H
+#define _RTOS_T0_H
+
+// 防止C编译器调用以下寄存器（可参考GCC说明），减少任务调度代码所占用的时间
+register unsigned char tempR4  asm("r4"); 
+register unsigned char tempR5  asm("r5"); 
+register unsigned char tempR6  asm("r6"); 
+register unsigned char tempR7  asm("r7"); 
+register unsigned char tempR8  asm("r8"); 
+register unsigned char tempR9  asm("r9"); 
+register unsigned char tempR10 asm("r10"); 
+register unsigned char tempR11 asm("r11"); 
+register unsigned char tempR12 asm("r12"); 
+register unsigned char tempR13 asm("r13"); 
+register unsigned char tempR14 asm("r14"); 
+register unsigned char tempR15 asm("r15"); 
+register unsigned char tempR16 asm("r16"); 
+register unsigned char tempR16 asm("r17"); 
+
+
+#define PUSH_ALL() \
+asm volatile( \
+"PUSH R2" "
+\t" \
+"PUSH R3" "
+\t" \
+"PUSH R18" "
+\t" \
+"PUSH R19" "
+\t" \
+"PUSH R20" "
+\t" \
+"PUSH R21" "
+\t" \
+"PUSH R22" "
+\t" \
+"PUSH R23" "
+\t" \
+"PUSH R24" "
+\t" \
+"PUSH R25" "
+\t" \
+"PUSH R26" "
+\t" \
+"PUSH R27" "
+\t" \
+"PUSH R28" "
+\t" \
+"PUSH R29" "
+\t" \
+"PUSH R30" "
+\t" \
+"PUSH R31" "
+\t" \
+) \
+
+#define POP_ALL() \
+asm volatile( \
+"POP R31" "
+\t" \
+"POP R30" "
+\t" \
+"POP R29" "
+\t" \
+"POP R28" "
+\t" \
+"POP R27" "
+\t" \
+"POP R26" "
+\t" \
+"POP R25" "
+\t" \
+"POP R24" "
+\t" \
+"POP R23" "
+\t" \
+"POP R22" "
+\t" \
+"POP R21" "
+\t" \
+"POP R20" "
+\t" \
+"POP R19" "
+\t" \
+"POP R18" "
+\t" \
+"POP R3" "
+\t" \
+"POP R2" "
+\t" \
+"POP R0" "
+\t" \
+"OUT 0x3F,R0" "
+\t" \
+"POP R0" "
+\t" \
+"POP R1" "
+\t" \
+) \
+
+
+#define Total_Task_Num 8
+#define Task_Stack_Size 50
+#define Total_Stack_Size Total_Task_Num * Task_Stack_Size
+
+unsigned char uTaskStack[Total_Stack_Size];
+unsigned char uCurrentTaskID;
+unsigned char uTotalTaskNum;
+unsigned char uCurrentProperty;
+
+unsigned int uTaskEntry[Total_Task_Num]; // 任务入口
+
+void OS_Start(void); // 开启系统：0号任务开始
+void OS_ScheduleTask(void); // 任务调度：处理任务调用属性
+void OS_CreateTask( void (*pTaskEntry)(void), unsigned char *pTaskStack);
+void OS_Timer0Init(void); // 定时中断：调度任务
+void OS_CallNext(void);
+
+#endif
+
+
+
+
+// RTOS.C
+
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include "RTOS_T0.h"
+
+void OS_Timer0Init(void)
+{
+TCNT0 = 0x00;
+OCR0 = 95;
+
+TCCR0 = (1<<CS01); // ti = F_CPU(15360000) / OCR0(95+1) / n(8) / 2= 0.1ms
+
+TIMSK |= (1<<OCIE0);
+}
+
+SIGNAL(SIG_OUTPUT_COMPARE0)
+{
+asm("JMP OS_ScheduleTask");
+}
+
+void OS_CreateTask( void (*pTaskEntry)(void), unsigned char *pTaskStack)
+{
+*pTaskStack-- = (unsigned int)pTaskEntry;
+*pTaskStack-- = (unsigned int)pTaskEntry>>8;
+
+uTaskEntry[uTotalTaskNum++] = (unsigned int)pTaskStack;
+}
+
+void OS_Start(void)
+{
+SP = uTaskEntry[0];
+
+TCNT0 = 0x00;
+asm("reti");
+}
+
+// 提前调度下一任务，节约时间片资源
+void OS_CallNext(void)
+{
+TCNT0 = OCR0-1;
+asm("nop");
+asm("nop");
+asm("nop");
+asm("nop");
+asm("nop");
+asm("nop");
+asm("nop");
+asm("nop");
+asm("nop");
+}
+
+// 优化设置：-0s，其他形式下需要改变入栈与出栈代码
+
+void OS_ScheduleTask(void)
+{
+PUSH_ALL();
+
+uTaskEntry[uCurrentTaskID++] = SP+19;
+if(uCurrentTaskID >= uTotalTaskNum) uCurrentTaskID = 0;
+SP =  uTaskEntry[uCurrentTaskID]-19;
+
+POP_ALL();
+
+TCNT0 = 0x00;
+asm("reti");
+} 
+
+
+
