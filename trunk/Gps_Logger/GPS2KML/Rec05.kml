@@ -1,0 +1,870 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+<Document>
+	<name>GPS.kml</name>
+	<Folder>
+		<name>GPS</name>
+		<description>
+			is a test
+		</description>
+		<name>GPS</name>
+		<open>1</open>
+		<Placemark>
+			<name>1</name>
+			<description>
+				2:	$GPRMC,0,3541.283203,N,13949.690430,E,1.450000,301.609985,230810
+			</description>
+			<Point>
+				<coordinates>139.828171,35.688049,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>2</name>
+			<description>
+				3:	$GPRMC,0,3541.285645,N,13949.686523,E,2.330000,269.579987,230810
+			</description>
+			<Point>
+				<coordinates>139.828125,35.688095,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>3</name>
+			<description>
+				4:	$GPRMC,0,3541.280518,N,13949.685547,E,2.900000,266.239990,230810
+			</description>
+			<Point>
+				<coordinates>139.828094,35.688007,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>4</name>
+			<description>
+				5:	$GPRMC,0,3541.277588,N,13949.675781,E,1.520000,254.130005,230810
+			</description>
+			<Point>
+				<coordinates>139.827942,35.687962,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>5</name>
+			<description>
+				6:	$GPRMC,0,3541.281006,N,13949.680664,E,3.180000,291.769989,230810
+			</description>
+			<Point>
+				<coordinates>139.828018,35.688019,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>6</name>
+			<description>
+				7:	$GPRMC,0,3541.279785,N,13949.667969,E,2.360000,290.709991,230810
+			</description>
+			<Point>
+				<coordinates>139.827789,35.687992,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>7</name>
+			<description>
+				8:	$GPRMC,0,3541.302490,N,13949.672852,E,0.620000,323.160004,230810
+			</description>
+			<Point>
+				<coordinates>139.827896,35.688374,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>8</name>
+			<description>
+				9:	$GPRMC,0,3541.276123,N,13949.678711,E,0.940000,354.640015,230810
+			</description>
+			<Point>
+				<coordinates>139.827972,35.687935,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>9</name>
+			<description>
+				10:	$GPRMC,0,3541.280762,N,13949.678711,E,4.770000,112.959999,230810
+			</description>
+			<Point>
+				<coordinates>139.827972,35.688011,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>10</name>
+			<description>
+				11:	$GPRMC,0,3541.277344,N,13949.681641,E,2.600000,76.900002,230810
+			</description>
+			<Point>
+				<coordinates>139.828018,35.687954,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>11</name>
+			<description>
+				12:	$GPRMC,0,3541.294189,N,13949.665039,E,2.030000,355.160004,230810
+			</description>
+			<Point>
+				<coordinates>139.827744,35.688236,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>12</name>
+			<description>
+				13:	$GPRMC,0,3541.298096,N,13949.659180,E,3.750000,339.309998,230810
+			</description>
+			<Point>
+				<coordinates>139.827667,35.688297,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>13</name>
+			<description>
+				14:	$GPRMC,0,3541.301025,N,13949.665039,E,1.890000,37.889999,230810
+			</description>
+			<Point>
+				<coordinates>139.827744,35.688351,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>14</name>
+			<description>
+				15:	$GPRMC,0,3541.349365,N,13949.574219,E,7.300000,286.750000,230810
+			</description>
+			<Point>
+				<coordinates>139.826233,35.689156,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>15</name>
+			<description>
+				16:	$GPRMC,0,3541.301758,N,13949.654297,E,2.490000,260.179993,230810
+			</description>
+			<Point>
+				<coordinates>139.827560,35.688362,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>16</name>
+			<description>
+				17:	$GPRMC,0,3541.305420,N,13949.646484,E,2.780000,273.839996,230810
+			</description>
+			<Point>
+				<coordinates>139.827438,35.688427,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>17</name>
+			<description>
+				18:	$GPRMC,0,3541.302979,N,13949.649414,E,0.850000,95.860001,230810
+			</description>
+			<Point>
+				<coordinates>139.827484,35.688381,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>18</name>
+			<description>
+				19:	$GPRMC,0,3541.302246,N,13949.621094,E,2.880000,262.709991,230810
+			</description>
+			<Point>
+				<coordinates>139.827026,35.688370,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>19</name>
+			<description>
+				20:	$GPRMC,0,3541.302002,N,13949.642578,E,1.710000,207.919998,230810
+			</description>
+			<Point>
+				<coordinates>139.827377,35.688370,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>20</name>
+			<description>
+				21:	$GPRMC,0,3541.305176,N,13949.637695,E,4.240000,132.199997,230810
+			</description>
+			<Point>
+				<coordinates>139.827301,35.688419,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>21</name>
+			<description>
+				22:	$GPRMC,0,3541.306641,N,13949.626953,E,3.400000,83.180000,230810
+			</description>
+			<Point>
+				<coordinates>139.827133,35.688446,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>22</name>
+			<description>
+				23:	$GPRMC,0,3541.320313,N,13949.624023,E,2.140000,347.269989,230810
+			</description>
+			<Point>
+				<coordinates>139.827072,35.688675,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>23</name>
+			<description>
+				24:	$GPRMC,0,3541.324463,N,13949.630859,E,3.690000,87.860001,230810
+			</description>
+			<Point>
+				<coordinates>139.827179,35.688744,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>24</name>
+			<description>
+				25:	$GPRMC,0,3541.327393,N,13949.630859,E,2.170000,63.759998,230810
+			</description>
+			<Point>
+				<coordinates>139.827179,35.688789,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>25</name>
+			<description>
+				26:	$GPRMC,0,3541.331299,N,13949.589844,E,2.770000,255.830002,230810
+			</description>
+			<Point>
+				<coordinates>139.826492,35.688858,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>26</name>
+			<description>
+				27:	$GPRMC,0,3541.332275,N,13949.591797,E,2.920000,258.859985,230810
+			</description>
+			<Point>
+				<coordinates>139.826523,35.688869,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>27</name>
+			<description>
+				28:	$GPRMC,0,3541.351074,N,13949.592773,E,1.240000,55.220001,230810
+			</description>
+			<Point>
+				<coordinates>139.826538,35.689182,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>28</name>
+			<description>
+				29:	$GPRMC,0,3541.354980,N,13949.590820,E,3.460000,351.279999,230810
+			</description>
+			<Point>
+				<coordinates>139.826523,35.689251,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>29</name>
+			<description>
+				30:	$GPRMC,0,3541.368408,N,13949.605469,E,3.500000,30.170000,230810
+			</description>
+			<Point>
+				<coordinates>139.826752,35.689476,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>30</name>
+			<description>
+				31:	$GPRMC,0,3541.345947,N,13949.597656,E,3.610000,6.700000,230810
+			</description>
+			<Point>
+				<coordinates>139.826614,35.689098,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>31</name>
+			<description>
+				32:	$GPRMC,0,3541.385498,N,13949.601563,E,3.950000,357.489990,230810
+			</description>
+			<Point>
+				<coordinates>139.826691,35.689762,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>32</name>
+			<description>
+				33:	$GPRMC,0,3541.346191,N,13949.559570,E,3.440000,358.549988,230810
+			</description>
+			<Point>
+				<coordinates>139.825989,35.689106,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>33</name>
+			<description>
+				34:	$GPRMC,0,3541.399902,N,13949.625977,E,6.220000,197.070007,230810
+			</description>
+			<Point>
+				<coordinates>139.827103,35.689995,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>34</name>
+			<description>
+				35:	$GPRMC,0,3541.389648,N,13949.586914,E,3.360000,290.790009,230810
+			</description>
+			<Point>
+				<coordinates>139.826447,35.689823,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>35</name>
+			<description>
+				36:	$GPRMC,0,3541.387695,N,13949.626953,E,1.980000,343.709991,230810
+			</description>
+			<Point>
+				<coordinates>139.827133,35.689793,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>36</name>
+			<description>
+				37:	$GPRMC,0,3541.768311,N,13946.570313,E,3.780000,312.859985,230810
+			</description>
+			<Point>
+				<coordinates>139.776169,35.696136,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>37</name>
+			<description>
+				38:	$GPRMC,0,3541.784668,N,13946.555664,E,3.620000,346.049988,230810
+			</description>
+			<Point>
+				<coordinates>139.775940,35.696411,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>38</name>
+			<description>
+				39:	$GPRMC,0,3541.798340,N,13946.533203,E,2.700000,353.769989,230810
+			</description>
+			<Point>
+				<coordinates>139.775558,35.696640,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>39</name>
+			<description>
+				40:	$GPRMC,0,3541.799805,N,13946.548828,E,3.550000,68.730003,230810
+			</description>
+			<Point>
+				<coordinates>139.775803,35.696667,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>40</name>
+			<description>
+				41:	$GPRMC,0,3541.806885,N,13946.541016,E,3.900000,79.709999,230810
+			</description>
+			<Point>
+				<coordinates>139.775681,35.696781,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>41</name>
+			<description>
+				42:	$GPRMC,0,3541.810547,N,13946.541016,E,2.980000,60.799999,230810
+			</description>
+			<Point>
+				<coordinates>139.775681,35.696842,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>42</name>
+			<description>
+				43:	$GPRMC,0,3541.845215,N,13946.584961,E,5.430000,45.990002,230810
+			</description>
+			<Point>
+				<coordinates>139.776413,35.697422,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>43</name>
+			<description>
+				44:	$GPRMC,0,3541.851807,N,13946.577148,E,2.550000,18.330000,230810
+			</description>
+			<Point>
+				<coordinates>139.776291,35.697529,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>44</name>
+			<description>
+				45:	$GPRMC,0,3541.852539,N,13946.581055,E,2.670000,29.480000,230810
+			</description>
+			<Point>
+				<coordinates>139.776337,35.697544,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>45</name>
+			<description>
+				46:	$GPRMC,0,3541.855225,N,13946.581055,E,2.310000,6.980000,230810
+			</description>
+			<Point>
+				<coordinates>139.776337,35.697586,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>46</name>
+			<description>
+				47:	$GPRMC,0,3541.850586,N,13946.606445,E,3.070000,81.360001,230810
+			</description>
+			<Point>
+				<coordinates>139.776779,35.697510,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>47</name>
+			<description>
+				48:	$GPRMC,0,3541.858643,N,13946.601563,E,4.060000,66.839996,230810
+			</description>
+			<Point>
+				<coordinates>139.776703,35.697643,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>48</name>
+			<description>
+				49:	$GPRMC,0,3541.861572,N,13946.594727,E,2.520000,91.379997,230810
+			</description>
+			<Point>
+				<coordinates>139.776566,35.697697,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>49</name>
+			<description>
+				50:	$GPRMC,0,3541.867188,N,13946.606445,E,3.110000,71.739998,230810
+			</description>
+			<Point>
+				<coordinates>139.776779,35.697784,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>50</name>
+			<description>
+				51:	$GPRMC,0,3541.875488,N,13946.591797,E,1.820000,25.570000,230810
+			</description>
+			<Point>
+				<coordinates>139.776520,35.697926,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>51</name>
+			<description>
+				52:	$GPRMC,0,3541.874756,N,13946.566406,E,1.440000,114.849998,230810
+			</description>
+			<Point>
+				<coordinates>139.776108,35.697910,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>52</name>
+			<description>
+				53:	$GPRMC,0,3541.873779,N,13946.574219,E,0.330000,81.190002,230810
+			</description>
+			<Point>
+				<coordinates>139.776245,35.697899,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>53</name>
+			<description>
+				54:	$GPRMC,0,3541.864746,N,13946.547852,E,5.480000,15.040000,230810
+			</description>
+			<Point>
+				<coordinates>139.775803,35.697746,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>54</name>
+			<description>
+				55:	$GPRMC,0,3541.861084,N,13946.556641,E,3.230000,73.500000,230810
+			</description>
+			<Point>
+				<coordinates>139.775940,35.697681,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>55</name>
+			<description>
+				56:	$GPRMC,0,3541.868164,N,13946.566406,E,3.240000,2.280000,230810
+			</description>
+			<Point>
+				<coordinates>139.776108,35.697803,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>56</name>
+			<description>
+				57:	$GPRMC,0,3541.873291,N,13946.571289,E,2.950000,50.259998,230810
+			</description>
+			<Point>
+				<coordinates>139.776184,35.697887,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>57</name>
+			<description>
+				58:	$GPRMC,0,3541.881592,N,13946.566406,E,1.020000,19.450001,230810
+			</description>
+			<Point>
+				<coordinates>139.776108,35.698025,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>58</name>
+			<description>
+				59:	$GPRMC,0,3541.894287,N,13946.536133,E,1.750000,341.690002,230810
+			</description>
+			<Point>
+				<coordinates>139.775604,35.698235,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>59</name>
+			<description>
+				60:	$GPRMC,0,3541.891602,N,13946.542969,E,0.650000,50.459999,230810
+			</description>
+			<Point>
+				<coordinates>139.775711,35.698193,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>60</name>
+			<description>
+				61:	$GPRMC,0,3541.900391,N,13946.558594,E,4.080000,196.279999,230810
+			</description>
+			<Point>
+				<coordinates>139.775986,35.698338,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>61</name>
+			<description>
+				62:	$GPRMC,0,3541.887207,N,13946.548828,E,2.150000,255.210007,230810
+			</description>
+			<Point>
+				<coordinates>139.775803,35.698120,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>62</name>
+			<description>
+				63:	$GPRMC,0,3541.893311,N,13946.377930,E,3.110000,295.350006,230810
+			</description>
+			<Point>
+				<coordinates>139.772964,35.698223,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>63</name>
+			<description>
+				64:	$GPRMC,0,3541.903076,N,13946.388672,E,1.260000,325.029999,230810
+			</description>
+			<Point>
+				<coordinates>139.773132,35.698383,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>64</name>
+			<description>
+				65:	$GPRMC,0,3541.913818,N,13946.414063,E,0.900000,217.399994,230810
+			</description>
+			<Point>
+				<coordinates>139.773575,35.698566,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>65</name>
+			<description>
+				66:	$GPRMC,0,3541.946045,N,13946.525391,E,2.910000,31.020000,230810
+			</description>
+			<Point>
+				<coordinates>139.775421,35.699100,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>66</name>
+			<description>
+				67:	$GPRMC,0,3541.918945,N,13946.449219,E,1.510000,330.019989,230810
+			</description>
+			<Point>
+				<coordinates>139.774155,35.698650,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>67</name>
+			<description>
+				68:	$GPRMC,0,3541.942871,N,13946.483398,E,2.730000,270.380005,230810
+			</description>
+			<Point>
+				<coordinates>139.774719,35.699051,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>68</name>
+			<description>
+				69:	$GPRMC,0,3541.908447,N,13946.502930,E,2.200000,174.589996,230810
+			</description>
+			<Point>
+				<coordinates>139.775040,35.698471,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>69</name>
+			<description>
+				70:	$GPRMC,0,3541.907471,N,13946.410156,E,1.480000,264.630005,230810
+			</description>
+			<Point>
+				<coordinates>139.773499,35.698460,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>70</name>
+			<description>
+				71:	$GPRMC,0,3541.907227,N,13946.407227,E,0.360000,122.010002,230810
+			</description>
+			<Point>
+				<coordinates>139.773438,35.698452,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>71</name>
+			<description>
+				72:	$GPRMC,0,3541.910400,N,13946.404297,E,0.670000,276.179993,230810
+			</description>
+			<Point>
+				<coordinates>139.773422,35.698509,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>72</name>
+			<description>
+				73:	$GPRMC,0,3541.909668,N,13946.405273,E,1.410000,290.290009,230810
+			</description>
+			<Point>
+				<coordinates>139.773422,35.698498,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>73</name>
+			<description>
+				74:	$GPRMC,0,3541.907471,N,13946.389648,E,1.440000,255.289993,230810
+			</description>
+			<Point>
+				<coordinates>139.773163,35.698460,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>74</name>
+			<description>
+				75:	$GPRMC,0,3541.903320,N,13946.394531,E,0.220000,143.860001,230810
+			</description>
+			<Point>
+				<coordinates>139.773239,35.698387,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>75</name>
+			<description>
+				76:	$GPRMC,0,3541.917480,N,13946.375977,E,2.820000,4.890000,230810
+			</description>
+			<Point>
+				<coordinates>139.772934,35.698624,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>76</name>
+			<description>
+				77:	$GPRMC,0,3541.921143,N,13946.367188,E,1.700000,316.880005,230810
+			</description>
+			<Point>
+				<coordinates>139.772781,35.698689,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>77</name>
+			<description>
+				78:	$GPRMC,0,3541.924805,N,13946.299805,E,2.940000,36.340000,230810
+			</description>
+			<Point>
+				<coordinates>139.771667,35.698746,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>78</name>
+			<description>
+				79:	$GPRMC,0,3541.945557,N,13946.362305,E,1.520000,300.489990,230810
+			</description>
+			<Point>
+				<coordinates>139.772705,35.699093,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>79</name>
+			<description>
+				80:	$GPRMC,0,3541.945068,N,13946.350586,E,1.770000,144.399994,230810
+			</description>
+			<Point>
+				<coordinates>139.772507,35.699081,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>80</name>
+			<description>
+				81:	$GPRMC,0,3541.959961,N,13946.372070,E,0.360000,94.339996,230810
+			</description>
+			<Point>
+				<coordinates>139.772858,35.699337,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>81</name>
+			<description>
+				82:	$GPRMC,0,3541.962891,N,13946.386719,E,0.470000,110.430000,230810
+			</description>
+			<Point>
+				<coordinates>139.773117,35.699379,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>82</name>
+			<description>
+				83:	$GPRMC,0,3541.965332,N,13946.395508,E,0.660000,228.779999,230810
+			</description>
+			<Point>
+				<coordinates>139.773270,35.699425,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>83</name>
+			<description>
+				84:	$GPRMC,0,3541.960449,N,13946.400391,E,0.600000,1.380000,230810
+			</description>
+			<Point>
+				<coordinates>139.773346,35.699341,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>84</name>
+			<description>
+				85:	$GPRMC,0,3541.967773,N,13946.406250,E,1.000000,235.160004,230810
+			</description>
+			<Point>
+				<coordinates>139.773438,35.699463,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>85</name>
+			<description>
+				86:	$GPRMC,0,3541.964600,N,13946.385742,E,1.040000,121.290001,230810
+			</description>
+			<Point>
+				<coordinates>139.773087,35.699413,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>86</name>
+			<description>
+				87:	$GPRMC,0,3541.956055,N,13946.364258,E,1.830000,102.449997,230810
+			</description>
+			<Point>
+				<coordinates>139.772736,35.699265,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>87</name>
+			<description>
+				88:	$GPRMC,0,3541.894775,N,13946.327148,E,0.340000,151.330002,230810
+			</description>
+			<Point>
+				<coordinates>139.772125,35.698250,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>88</name>
+			<description>
+				89:	$GPRMC,0,3541.895752,N,13946.341797,E,1.790000,202.089996,230810
+			</description>
+			<Point>
+				<coordinates>139.772369,35.698261,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>89</name>
+			<description>
+				90:	$GPRMC,0,3541.894775,N,13946.326172,E,0.730000,92.690002,230810
+			</description>
+			<Point>
+				<coordinates>139.772095,35.698250,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>90</name>
+			<description>
+				91:	$GPRMC,0,3541.894531,N,13946.329102,E,1.200000,206.050003,230810
+			</description>
+			<Point>
+				<coordinates>139.772141,35.698242,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>91</name>
+			<description>
+				92:	$GPRMC,0,3541.893311,N,13946.349609,E,2.510000,116.720001,230810
+			</description>
+			<Point>
+				<coordinates>139.772507,35.698223,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+		<name>path line</name>
+		<LineString>
+		<coordinates>
+			139.772507,35.698223,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+			0.000000,0.000000,0
+		</coordinates>
+		</LineString>
+		</Placemark>
+	</Folder>
+</Document>
+</kml>

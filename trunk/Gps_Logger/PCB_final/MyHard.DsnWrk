@@ -1,0 +1,10 @@
+[ProjectGroup]
+Version=1.0
+[Project1]
+ProjectPath=Libs\TI Microcontroller 16-Bit MSP430.LibPkg
+[Project2]
+ProjectPath=main\main.PrjPCB
+[Project3]
+ProjectPath=Libs\MyLib.LibPkg
+[Project4]
+ProjectPath=C:\Program Files\Altium Designer Summer 09\Library\Miscellaneous Connectors\Miscellaneous Connectors.LIBPKG
